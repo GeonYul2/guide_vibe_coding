@@ -1,0 +1,110 @@
+version: 0.4.0
+purpose: >
+  Weekly GitHub-first discovery of hot agent-engineering technique repositories.
+  Video/article sources are supplemental and are handled by workflows/source-ingestion.md.
+cadence: weekly
+schedule:
+  day: monday
+  utc_cron: "0 0 * * 1"
+  kst_time: "Monday 09:00"
+search:
+  per_query_limit: 10
+  queries:
+    - "agent harness stars:>50 pushed:>={year_start}"
+    - "agent eval framework stars:>100 pushed:>={year_start}"
+    - "structured outputs llm schema validation stars:>50 pushed:>={year_start}"
+    - "llm guardrails tripwires agent stars:>50 pushed:>={year_start}"
+    - "llm observability agents telemetry stars:>100 pushed:>={year_start}"
+    - "context engineering llm stars:>100 pushed:>={year_start}"
+    - "prompt caching token optimization llm agent stars:>50 pushed:>={year_start}"
+    - "llm cost optimization token budget agent stars:>50 pushed:>={year_start}"
+    - "prompt engineering workflow agent stars:>50 pushed:>={year_start}"
+    - "agentic engineering workflow stars:>50 pushed:>={year_start}"
+    - "mcp tools agent stars:>100 pushed:>={year_start}"
+    - "ai agent memory rag governance stars:>50 pushed:>={year_start}"
+    - "llm model routing fallback agent stars:>50 pushed:>={year_start}"
+    - "ai agent security privacy guardrails stars:>50 pushed:>={year_start}"
+    - "ai agent canary rollout monitoring stars:>20 pushed:>={year_start}"
+    - "claude code agents workflow stars:>100 pushed:>={year_start}"
+filters:
+  min_technique_score: 3
+  required_any_keywords:
+    - agent
+    - agents
+    - agentic
+    - llm
+    - harness
+    - eval
+    - evaluation
+    - benchmark
+    - observability
+    - trace
+    - tracing
+    - telemetry
+    - schema
+    - schemas
+    - structured output
+    - structured outputs
+    - validation
+    - prompt
+    - workflow
+    - context
+    - token
+    - tokens
+    - cost
+    - budget
+    - optimization
+    - cache
+    - caching
+    - memory
+    - rag
+    - retrieval
+    - vector
+    - mcp
+    - tool
+    - tools
+    - framework
+    - sdk
+    - orchestration
+    - playbook
+    - patterns
+    - guide
+    - testing
+    - guardrails
+    - sandbox
+    - permission
+    - privacy
+    - security
+    - pii
+    - routing
+    - fallback
+    - canary
+    - rollout
+    - deployment
+  exclude_keywords:
+    - flight
+    - flights
+    - airline
+    - booking
+    - travel
+    - crypto trading
+    - dating
+    - game bot
+scoring:
+  factors:
+    - stars
+    - star_delta_from_previous_radar
+    - recent_push
+    - technique_keyword_score
+    - matched_query_count
+    - fork_count
+review_policy:
+  auto_vendor_repos: false
+  auto_modify_main_registry: false
+  output_only:
+    - repos/radar/YYYY-MM-DD.md
+    - repos/radar/YYYY-MM-DD-candidates.yaml
+  human_review_required_for:
+    - moving candidate into repos/registry.yaml
+    - marking a source as adopted
+    - adding a new mandatory technique

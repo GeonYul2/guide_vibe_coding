@@ -1,0 +1,228 @@
+version: 0.3.0
+purpose: >
+  Organize agent-engineering techniques into categories and recommend techniques
+  based on the context of the agent being built.
+
+categories:
+  - id: intake_and_scope
+    name: Intake, Scope, and Readiness
+    description: Clarify intent, lock scope, and decide whether implementation is ready.
+    techniques:
+      - deep_interview
+      - agent_readiness_scoring
+      - scope_control_and_minimal_diff
+
+  - id: operating_contracts
+    name: Agent Operating Contracts
+    description: Rules that govern how the agent communicates, edits, and evolves prompts/policies.
+    techniques:
+      - concise_operating_contract
+      - default_response_brevity
+      - prompt_versioning
+      - scope_control_and_minimal_diff
+
+  - id: schemas_and_outputs
+    name: Schemas and Structured Outputs
+    description: Make agent outputs parseable, versioned, validatable, and safe for downstream automation.
+    techniques:
+      - structured_output_schema_validation
+      - tool_contracts
+      - eval_regression_loop
+
+  - id: harness_and_runtime
+    name: Harness and Runtime Design
+    description: Execution loop, tool registry, state, permissions, retries, model routing, and reproducibility.
+    techniques:
+      - harness_engineering
+      - agent_harness_runtime_design
+      - tool_contracts
+      - permissioned_tool_execution
+      - model_routing_fallback_policy
+      - deployment_rollout_canary
+
+  - id: quality_and_evals
+    name: Quality, Evals, and Regression
+    description: Prove behavior, catch regressions, and preserve failed cases.
+    techniques:
+      - eval_regression_loop
+      - failed_case_memory
+      - harness_engineering
+      - structured_output_schema_validation
+      - guardrails_tripwires
+
+  - id: context_cost_and_memory
+    name: Context, Cost, Caching, and Memory
+    description: Reduce token/cost waste and govern repeated, retrieved, or long-lived context.
+    techniques:
+      - token_context_caching
+      - retrieval_memory_governance
+      - cost_budgeting
+      - token_efficiency_budget_gate
+      - model_routing_fallback_policy
+      - observability_tracing
+
+  - id: observability_and_operations
+    name: Observability, Telemetry, and Operations
+    description: Standardize traces, metrics, rollout checks, and production feedback loops.
+    techniques:
+      - observability_tracing
+      - genai_telemetry_standardization
+      - deployment_rollout_canary
+      - eval_regression_loop
+
+  - id: safety_security_and_governance
+    name: Safety, Security, Approval, and Governance
+    description: Human approval, guardrails, data protection, auditability, and source-backed change control.
+    techniques:
+      - safety_handoff_boundaries
+      - guardrails_tripwires
+      - security_privacy_data_governance
+      - permissioned_tool_execution
+      - source_backed_technique_ingestion
+      - observability_tracing
+
+  - id: discovery_and_update
+    name: Discovery and Update Loop
+    description: Keep the guide current from GitHub-first technique repository discovery and supplemental sources.
+    techniques:
+      - source_backed_technique_ingestion
+
+agent_context_profiles:
+  - id: sql_or_data_agent
+    name: SQL / Data / Analytics Agent
+    description: Agents that read SQL, metrics, dashboards, warehouses, or analytical code.
+    recommended_techniques:
+      must:
+        - deep_interview
+        - structured_output_schema_validation
+        - tool_contracts
+        - harness_engineering
+        - eval_regression_loop
+        - failed_case_memory
+        - retrieval_memory_governance
+        - observability_tracing
+        - security_privacy_data_governance
+        - safety_handoff_boundaries
+        - token_efficiency_budget_gate
+      should:
+        - token_context_caching
+        - cost_budgeting
+        - model_routing_fallback_policy
+        - genai_telemetry_standardization
+        - agent_readiness_scoring
+      optional:
+        - permissioned_tool_execution
+        - deployment_rollout_canary
+
+  - id: coding_agent
+    name: Coding / Refactoring Agent
+    description: Agents that edit code, tests, configuration, prompts, or repositories.
+    recommended_techniques:
+      must:
+        - concise_operating_contract
+        - scope_control_and_minimal_diff
+        - structured_output_schema_validation
+        - harness_engineering
+        - eval_regression_loop
+        - failed_case_memory
+        - tool_contracts
+        - permissioned_tool_execution
+        - guardrails_tripwires
+        - token_efficiency_budget_gate
+      should:
+        - observability_tracing
+        - genai_telemetry_standardization
+        - model_routing_fallback_policy
+        - deployment_rollout_canary
+        - default_response_brevity
+        - agent_readiness_scoring
+      optional:
+        - token_context_caching
+        - security_privacy_data_governance
+
+  - id: document_knowledge_agent
+    name: Document / Knowledge Extraction Agent
+    description: Agents that turn documents, conversations, or internal knowledge into structured artifacts.
+    recommended_techniques:
+      must:
+        - deep_interview
+        - structured_output_schema_validation
+        - prompt_versioning
+        - retrieval_memory_governance
+        - eval_regression_loop
+        - failed_case_memory
+        - safety_handoff_boundaries
+        - guardrails_tripwires
+        - security_privacy_data_governance
+        - source_backed_technique_ingestion
+        - token_efficiency_budget_gate
+      should:
+        - token_context_caching
+        - observability_tracing
+        - genai_telemetry_standardization
+        - agent_readiness_scoring
+      optional:
+        - tool_contracts
+        - model_routing_fallback_policy
+
+  - id: workflow_automation_agent
+    name: Workflow Automation Agent
+    description: Agents that call tools/APIs, mutate state, create tickets, send messages, or run business processes.
+    recommended_techniques:
+      must:
+        - deep_interview
+        - structured_output_schema_validation
+        - tool_contracts
+        - permissioned_tool_execution
+        - safety_handoff_boundaries
+        - guardrails_tripwires
+        - security_privacy_data_governance
+        - agent_harness_runtime_design
+        - observability_tracing
+        - failed_case_memory
+        - token_efficiency_budget_gate
+      should:
+        - eval_regression_loop
+        - deployment_rollout_canary
+        - model_routing_fallback_policy
+        - cost_budgeting
+        - genai_telemetry_standardization
+        - agent_readiness_scoring
+      optional:
+        - token_context_caching
+        - retrieval_memory_governance
+
+  - id: research_or_radar_agent
+    name: Research / Repository Radar Agent
+    description: Agents that discover sources, track repositories, summarize techniques, or update guidance.
+    recommended_techniques:
+      must:
+        - source_backed_technique_ingestion
+        - structured_output_schema_validation
+        - retrieval_memory_governance
+        - observability_tracing
+        - eval_regression_loop
+        - prompt_versioning
+        - default_response_brevity
+        - token_efficiency_budget_gate
+      should:
+        - cost_budgeting
+        - token_context_caching
+        - genai_telemetry_standardization
+        - model_routing_fallback_policy
+        - agent_readiness_scoring
+      optional:
+        - safety_handoff_boundaries
+        - guardrails_tripwires
+        - security_privacy_data_governance
+
+selection_rules:
+  - Always consider every technique in `techniques/registry.yaml`, but use this taxonomy to prioritize must/should/optional by context.
+  - If an agent can mutate external state, include `permissioned_tool_execution`, `tool_contracts`, `guardrails_tripwires`, and `safety_handoff_boundaries` as must-have techniques.
+  - If an agent emits machine-consumed output, include `structured_output_schema_validation` as a must-have technique.
+  - If an agent uses retrieval, memory, long-lived context, or internal knowledge, include `retrieval_memory_governance`, `security_privacy_data_governance`, and `token_context_caching`.
+  - For every business automation agent, include `token_efficiency_budget_gate` as a hard gate because token usage maps directly to cost.
+  - If an agent uses long or repeated context, include `token_context_caching`, `cost_budgeting`, `token_efficiency_budget_gate`, and `model_routing_fallback_policy` as must or should.
+  - If an agent produces knowledge, summaries, or classifications, include `eval_regression_loop`, `failed_case_memory`, `structured_output_schema_validation`, and `source_backed_technique_ingestion`.
+  - If an agent edits code, include `scope_control_and_minimal_diff`, `harness_engineering`, `permissioned_tool_execution`, and `deployment_rollout_canary` when production release is expected.
+  - If an agent will run beyond a prototype, include `genai_telemetry_standardization` and `deployment_rollout_canary`.

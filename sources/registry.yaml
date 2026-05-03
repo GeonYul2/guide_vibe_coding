@@ -1,0 +1,57 @@
+version: 0.1.0
+sources:
+  - id: youtube-vibecoding-silicon-valley-techniques
+    type: youtube
+    url: https://youtu.be/ahGgv9lsWlU
+    title: "[세미나 편집본] 8년차 실리콘밸리 엔지니어의 바이브코딩 테크닉"
+    status: supplemental_seed_queued_for_structured_summary
+    tags:
+      - vibe-coding
+      - agent-workflow
+      - implementation-discipline
+      - productivity
+    extract_into:
+      - techniques/registry.yaml
+      - workflows/build-agent.md
+    notes: >
+      Use as source material for practical agent-assisted implementation workflow patterns.
+      Do not copy transcript verbatim; extract reusable techniques, gates, and checklists.
+
+  - id: youtube-claw-code-harness-engineering
+    type: youtube
+    url: https://www.youtube.com/watch?v=-p0e03kVdBI&t=4291s
+    title: "186k 깃헙 트렌딩 1위 Claw Code의 개발자와 하네스 엔지니어링에 대해 이야기 합니다. l OMC OMX 개발자 허예찬(AI 팟캐스트 #80)"
+    status: supplemental_seed_queued_for_structured_summary
+    tags:
+      - harness-engineering
+      - agent-runtime
+      - tool-system
+      - permissions
+      - multi-agent
+      - observability
+    extract_into:
+      - techniques/registry.yaml
+      - workflows/build-agent.md
+      - templates/tool-contracts.md
+    notes: >
+      Use as source material for harness architecture, tool contracts, permissioning,
+      session/runtime state, and verification loop patterns.
+
+  - id: youtube-karpathy-65-line-claude-md
+    type: youtube
+    url: https://www.youtube.com/watch?v=gol5jv4wcfs
+    title: "깃헙 스타 10만개 받은 65줄짜리 CLAUDE.md (안드레 카파시)"
+    status: supplemental_seed_queued_for_structured_summary
+    tags:
+      - agent-instructions
+      - claude-md
+      - operating-contract
+      - prompt-discipline
+      - scope-control
+    extract_into:
+      - AGENTS.md
+      - techniques/registry.yaml
+      - templates/implementation-plan.md
+    notes: >
+      Use as source material for concise project instruction files, minimal but strict
+      agent operating contracts, scope control, and verification-first behavior.

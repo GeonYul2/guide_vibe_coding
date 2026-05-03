@@ -1,0 +1,30 @@
+name: validate-agent-guide
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Compile scripts
+        run: python3 -m py_compile scripts/*.py
+      - name: Run guide contract tests
+        run: python3 scripts/test_agent_guide.py
+      - name: Validate task artifacts when tasks exist
+        run: |
+          shopt -s nullglob
+          for task in tasks/*; do
+            if [ -d "$task" ]; then
+              python3 scripts/validate_agent_task.py "$task"
+            fi
+          done

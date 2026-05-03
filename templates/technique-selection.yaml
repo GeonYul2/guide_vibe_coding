@@ -1,0 +1,53 @@
+# Select or reject every technique from techniques/registry.yaml.
+selected:
+  - id: deep_interview
+    reason: TODO
+  - id: harness_engineering
+    reason: TODO
+  - id: eval_regression_loop
+    reason: TODO
+  - id: structured_output_schema_validation
+    reason: TODO
+  - id: failed_case_memory
+    reason: TODO
+  - id: guardrails_tripwires
+    reason: TODO
+  - id: token_context_caching
+    reason: TODO
+  - id: retrieval_memory_governance
+    reason: TODO
+  - id: prompt_versioning
+    reason: TODO
+  - id: tool_contracts
+    reason: TODO
+  - id: observability_tracing
+    reason: TODO
+  - id: genai_telemetry_standardization
+    reason: TODO
+  - id: cost_budgeting
+    reason: TODO
+  - id: token_efficiency_budget_gate
+    reason: TODO
+  - id: model_routing_fallback_policy
+    reason: TODO
+  - id: safety_handoff_boundaries
+    reason: TODO
+  - id: security_privacy_data_governance
+    reason: TODO
+  - id: deployment_rollout_canary
+    reason: TODO
+  - id: concise_operating_contract
+    reason: TODO
+  - id: scope_control_and_minimal_diff
+    reason: TODO
+  - id: agent_harness_runtime_design
+    reason: TODO
+  - id: permissioned_tool_execution
+    reason: TODO
+  - id: source_backed_technique_ingestion
+    reason: TODO
+  - id: default_response_brevity
+    reason: TODO
+  - id: agent_readiness_scoring
+    reason: TODO
+rejected: []

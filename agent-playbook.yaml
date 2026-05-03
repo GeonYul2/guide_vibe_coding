@@ -1,0 +1,109 @@
+version: 0.3.0
+purpose: >
+  Machine-readable execution contract for agents building automation agents with this repository.
+  The primary refresh loop discovers hot GitHub technique repositories; videos/articles are supplemental source ingestion.
+default_workflow: workflows/build-agent.md
+required_boot_files:
+  - AGENTS.md
+  - agent-playbook.yaml
+  - techniques/registry.yaml
+  - techniques/taxonomy.yaml
+  - workflows/build-agent.md
+required_artifacts:
+  - path: agent-prd.md
+    template: templates/agent-prd.md
+    gate: before_implementation
+  - path: technique-selection.yaml
+    template: templates/technique-selection.yaml
+    gate: before_implementation
+  - path: output-schema.md
+    template: templates/output-schema.md
+    gate: before_implementation
+  - path: eval-spec.md
+    template: templates/eval-spec.md
+    gate: before_implementation
+  - path: guardrails.md
+    template: templates/guardrails.md
+    gate: before_implementation
+  - path: tool-contracts.md
+    template: templates/tool-contracts.md
+    gate: before_implementation
+  - path: retrieval-memory.md
+    template: templates/retrieval-memory.md
+    gate: before_implementation
+  - path: failure-cases.md
+    template: templates/failure-cases.md
+    gate: before_implementation
+  - path: cost-and-caching.md
+    template: templates/cost-and-caching.md
+    gate: before_implementation
+  - path: model-routing.md
+    template: templates/model-routing.md
+    gate: before_implementation
+  - path: telemetry.md
+    template: templates/telemetry.md
+    gate: before_implementation
+  - path: security-privacy.md
+    template: templates/security-privacy.md
+    gate: before_implementation
+  - path: release-rollout.md
+    template: templates/release-rollout.md
+    gate: before_implementation
+  - path: readiness-scorecard.md
+    template: templates/readiness-scorecard.md
+    gate: before_implementation
+  - path: implementation-plan.md
+    template: templates/implementation-plan.md
+    gate: before_implementation
+mandatory_technique_consideration:
+  - deep_interview
+  - harness_engineering
+  - eval_regression_loop
+  - structured_output_schema_validation
+  - failed_case_memory
+  - guardrails_tripwires
+  - token_context_caching
+  - retrieval_memory_governance
+  - prompt_versioning
+  - tool_contracts
+  - observability_tracing
+  - genai_telemetry_standardization
+  - cost_budgeting
+  - token_efficiency_budget_gate
+  - model_routing_fallback_policy
+  - safety_handoff_boundaries
+  - security_privacy_data_governance
+  - deployment_rollout_canary
+  - concise_operating_contract
+  - scope_control_and_minimal_diff
+  - agent_harness_runtime_design
+  - permissioned_tool_execution
+  - source_backed_technique_ingestion
+  - default_response_brevity
+  - agent_readiness_scoring
+validation:
+  command: python3 scripts/validate_agent_task.py tasks/<task-slug>
+  required_before_claims:
+    - ready_for_implementation
+    - implementation_complete
+technique_discovery_policy:
+  primary_source: github_repositories
+  scheduler: .github/workflows/weekly-repo-radar.yml
+  config: repos/radar-config.yaml
+  script: scripts/weekly_repo_radar.py
+  output:
+    - repos/radar/YYYY-MM-DD.md
+    - repos/radar/YYYY-MM-DD-candidates.yaml
+  supplemental_sources:
+    - youtube
+    - articles
+    - talks
+    - release_notes
+external_repo_policy:
+  vendoring: forbidden
+  allowed_storage:
+    - repos/registry.yaml
+    - repos/summaries/*.md
+    - repos/radar/*.md
+    - repos/radar/*-candidates.yaml
+  update_workflow: workflows/weekly-repo-radar.md

@@ -1,0 +1,209 @@
+version: 0.3.0
+techniques:
+  - id: deep_interview
+    name: Deep Interview / Requirement Crystallization
+    enforcement: mandatory_consideration
+    apply_when: Task intent, scope, non-goals, success criteria, or decision boundaries are unclear.
+    output: agent-prd.md
+    reject_only_if: User already provided a complete PRD with explicit non-goals and success criteria.
+
+  - id: harness_engineering
+    name: Harness Engineering
+    enforcement: mandatory_consideration
+    apply_when: The agent has repeatable inputs/outputs, tool calls, or multi-step behavior.
+    output: eval-spec.md
+    notes: Define deterministic fixtures, mock tools where possible, and smoke/e2e paths.
+
+  - id: eval_regression_loop
+    name: Eval and Regression Loop
+    enforcement: mandatory_consideration
+    apply_when: Agent output quality can regress or needs measurable acceptance criteria.
+    output: eval-spec.md
+    notes: Convert every fixed bug and failure into a regression case.
+
+  - id: structured_output_schema_validation
+    name: Structured Output Schema Validation
+    enforcement: mandatory_consideration
+    apply_when: The agent emits JSON, YAML, Markdown specs, classifications, tool inputs, or downstream automation payloads.
+    output: output-schema.md and eval-spec.md
+    notes: Define schemas, required fields, parser behavior, repair limits, schema versions, and fail-closed validation.
+
+  - id: failed_case_memory
+    name: Failed-Case Memory
+    enforcement: mandatory_consideration
+    apply_when: The agent can fail due to ambiguous user input, bad tool output, edge cases, or model behavior.
+    output: failure-cases.md
+    notes: Store failures with trigger, expected handling, fix, and regression link.
+
+  - id: guardrails_tripwires
+    name: Guardrails and Tripwires
+    enforcement: mandatory_consideration
+    apply_when: The agent handles unsafe requests, policy-sensitive outputs, tool calls, private data, or out-of-bounds tasks.
+    output: guardrails.md
+    notes: Define input, output, and tool-call guardrails; tripwire actions; human handoff; and adversarial eval cases.
+
+  - id: token_context_caching
+    name: Token / Context Caching
+    enforcement: mandatory_consideration
+    apply_when: The task uses repeated long context, stable docs, repeated prompts, or high-volume runs.
+    output: cost-and-caching.md
+    notes: Define cache keys, invalidation rules, stale-data risks, and privacy boundaries.
+
+  - id: retrieval_memory_governance
+    name: Retrieval and Memory Governance
+    enforcement: mandatory_consideration
+    apply_when: The agent uses RAG, vector search, session memory, source references, knowledge stores, or long-lived context.
+    output: retrieval-memory.md and cost-and-caching.md
+    notes: Define source-of-truth hierarchy, freshness, citations, retention, PII filtering, indexing, and invalidation.
+
+  - id: prompt_versioning
+    name: Prompt and Policy Versioning
+    enforcement: mandatory_consideration
+    apply_when: Prompts, system policies, rubrics, or examples influence behavior.
+    output: implementation-plan.md
+    notes: Track prompt versions, migration notes, and eval impact.
+
+  - id: tool_contracts
+    name: Tool Contract Design
+    enforcement: mandatory_consideration
+    apply_when: The agent calls APIs, scripts, databases, browsers, or internal systems.
+    output: tool-contracts.md
+    notes: Define schema, auth, timeout, retries, idempotency, and failure semantics.
+
+  - id: observability_tracing
+    name: Observability and Trace Logging
+    enforcement: mandatory_consideration
+    apply_when: The agent performs multi-step decisions or external side effects.
+    output: telemetry.md and implementation-plan.md
+    notes: Capture inputs, decisions, tool calls, costs, errors, and final outcomes without leaking secrets.
+
+  - id: genai_telemetry_standardization
+    name: GenAI Telemetry Standardization
+    enforcement: mandatory_consideration
+    apply_when: The agent needs production observability, cross-agent dashboards, cost/latency/quality tracking, or trace analysis.
+    output: telemetry.md
+    notes: Standardize model, tool, retrieval, cache, eval, error, latency, token, and cost events with redaction rules.
+
+  - id: cost_budgeting
+    name: Cost Budgeting
+    enforcement: mandatory_consideration
+    apply_when: The agent uses paid model calls, large context, or scheduled/batch runs.
+    output: cost-and-caching.md
+    notes: Define budget per run, fallback model policy, cache hit target, and stop conditions.
+
+  - id: token_efficiency_budget_gate
+    name: Token Efficiency Budget Gate
+    enforcement: hard_gate
+    apply_when: Every business automation agent, because token usage maps directly to operating cost.
+    output: cost-and-caching.md, model-routing.md, telemetry.md, readiness-scorecard.md
+    notes: >
+      Implementation is blocked until max input/output/total tokens, cost ceiling,
+      cache hit target, context pruning rule, cheap-model fallback, and token telemetry
+      are explicitly defined. Prefer retrieval, summarization, stable prompt caching,
+      deduplication, and compact structured outputs before increasing context.
+
+  - id: model_routing_fallback_policy
+    name: Model Routing and Fallback Policy
+    enforcement: mandatory_consideration
+    apply_when: The agent has variable task difficulty, budget tiers, latency targets, reliability requirements, or batch/interactive modes.
+    output: model-routing.md and cost-and-caching.md
+    notes: Define routing by task class, fallback order, retry rules, quality gates, budget ceilings, and escalation criteria.
+
+  - id: safety_handoff_boundaries
+    name: Safety and Human Handoff Boundaries
+    enforcement: mandatory_consideration
+    apply_when: The agent can mutate data, contact users, spend money, deploy code, or make irreversible decisions.
+    output: agent-prd.md and guardrails.md
+    notes: Define approval gates, rollback, audit trail, and human escalation criteria.
+
+  - id: security_privacy_data_governance
+    name: Security, Privacy, and Data Governance
+    enforcement: mandatory_consideration
+    apply_when: The agent touches company data, customer data, credentials, regulated information, logs, or internal systems.
+    output: security-privacy.md
+    notes: Define data classification, least privilege, secrets handling, PII redaction, retention, deletion, and audit rules.
+
+  - id: deployment_rollout_canary
+    name: Deployment, Rollout, and Canary Strategy
+    enforcement: mandatory_consideration
+    apply_when: The agent will run in production, CI, scheduled jobs, user-facing workflows, or background automation.
+    output: release-rollout.md
+    notes: Define staged rollout, canary, kill switch, rollback, incident owner, monitoring, and post-deploy eval checks.
+
+  - id: concise_operating_contract
+    name: Concise Agent Operating Contract
+    enforcement: mandatory_consideration
+    source_refs:
+      - sources/registry.yaml#youtube-karpathy-65-line-claude-md
+    apply_when: The agent will be used repeatedly by a team or across projects.
+    output: AGENTS.md or task-local instruction file
+    notes: >
+      Keep instructions short, hierarchical, enforceable, and behavior-oriented.
+      Prefer strict rules about scope control, verification, and asking only when truly blocked.
+
+  - id: scope_control_and_minimal_diff
+    name: Scope Control and Minimal Diff Discipline
+    enforcement: mandatory_consideration
+    source_refs:
+      - sources/registry.yaml#youtube-karpathy-65-line-claude-md
+      - sources/registry.yaml#youtube-vibecoding-silicon-valley-techniques
+    apply_when: The agent edits code, docs, configs, prompts, or workflows.
+    output: implementation-plan.md
+    notes: >
+      Require small reversible changes, no opportunistic refactors, explicit non-goals,
+      and verification tied to the requested behavior.
+
+  - id: agent_harness_runtime_design
+    name: Agent Harness Runtime Design
+    enforcement: mandatory_consideration
+    source_refs:
+      - sources/registry.yaml#youtube-claw-code-harness-engineering
+    apply_when: The agent needs repeated execution, tools, permissions, sessions, retries, streaming, or subagents.
+    output: tool-contracts.md and eval-spec.md
+    notes: >
+      Separate the model brain from the harness: tool registry, permission policy,
+      event loop, session state, budget controls, retry/fallback, and trace logging.
+
+  - id: permissioned_tool_execution
+    name: Permissioned Tool Execution
+    enforcement: mandatory_consideration
+    source_refs:
+      - sources/registry.yaml#youtube-claw-code-harness-engineering
+    apply_when: The agent can read/write files, call APIs, run commands, use browsers, or mutate business data.
+    output: tool-contracts.md
+    notes: >
+      Define tool allowlists, approval gates, sandbox boundaries, irreversible-action checks,
+      timeouts, retries, idempotency, and audit logs.
+
+  - id: source_backed_technique_ingestion
+    name: Source-Backed Technique Ingestion
+    enforcement: mandatory_consideration
+    source_refs:
+      - sources/registry.yaml
+      - workflows/weekly-repo-radar.md
+    apply_when: New videos, posts, docs, or repositories are added as inspiration.
+    output: techniques/registry.yaml or repos/registry.yaml
+    notes: >
+      Store source metadata, extract only reusable patterns, avoid long copied transcripts,
+      and require a reason before promoting a technique to mandatory status.
+
+  - id: default_response_brevity
+    name: Default Response Brevity
+    enforcement: mandatory_consideration
+    apply_when: The agent communicates progress, results, blockers, or next steps to a human.
+    output: AGENTS.md or task-local instruction file
+    notes: >
+      Unless the human explicitly asks for detail, keep normal user-facing replies to
+      1-2 sentences. Expand only for safety, blockers, validation evidence, handoff,
+      or requested artifacts.
+
+  - id: agent_readiness_scoring
+    name: Agent Readiness Scoring / Gap Map
+    enforcement: mandatory_consideration
+    apply_when: Before implementation starts for any automation-agent task.
+    output: readiness-scorecard.md
+    notes: >
+      Score implementation readiness across intent, scope, schema, technique selection,
+      eval/harness, failure memory, tool contracts, cost/caching, observability, and
+      human review. Use the score to expose missing work. HTML maps are optional
+      generated reports, not required backend MVP scope.

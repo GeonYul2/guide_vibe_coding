@@ -1,0 +1,587 @@
+version: 0.1.0
+generated_at: 2026-05-03
+primary_source: github_repositories
+supplemental_sources:
+  - youtube
+  - articles
+  - release_notes
+policy:
+  auto_vendor_repos: false
+  auto_modify_main_registry: false
+  human_review_required: true
+source_status: complete
+source_errors: []
+queries:
+  - "agent harness stars:>50 pushed:>=2026-01-01"
+  - "agent eval framework stars:>100 pushed:>=2026-01-01"
+  - "llm observability agents stars:>100 pushed:>=2026-01-01"
+  - "context engineering llm stars:>100 pushed:>=2026-01-01"
+  - "prompt engineering workflow agent stars:>50 pushed:>=2026-01-01"
+  - "agentic engineering workflow stars:>50 pushed:>=2026-01-01"
+  - "mcp tools agent stars:>100 pushed:>=2026-01-01"
+  - "ai agent memory rag stars:>100 pushed:>=2026-01-01"
+  - "claude code agents workflow stars:>100 pushed:>=2026-01-01"
+candidates:
+  - name: mksglu/context-mode
+    url: "https://github.com/mksglu/context-mode"
+    status: candidate
+    score: 234
+    technique_score: 15
+    stars: 12142
+    previous_stars: null
+    star_delta: 0
+    forks: 842
+    open_issues: 3
+    language: TypeScript
+    license: NOASSERTION
+    pushed_at: "2026-05-03T12:22:52Z"
+    description: "Context window optimization for AI coding agents. Sandboxes tool output, 98% reduction. 14 platforms"
+    topics:
+      - antigravity
+      - claude
+      - claude-code
+      - claude-code-hooks
+      - claude-code-plugins
+      - claude-code-skill
+      - codex
+      - codex-cli
+      - context-mode
+      - copilot
+      - cursor-plugin
+      - kiro
+      - mcp
+      - mcp-server
+      - mcp-tools
+      - openclaw
+      - opencode
+      - pi-agent
+      - skills
+      - zed-extension
+    technique_match_reasons:
+      - "required_any=agent,agents,context,mcp,tool,tools,sandbox"
+      - technique_score=15
+    matched_queries:
+      - "mcp tools agent stars:>100 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: topoteretes/cognee
+    url: "https://github.com/topoteretes/cognee"
+    status: candidate
+    score: 220
+    technique_score: 8
+    stars: 16994
+    previous_stars: null
+    star_delta: 0
+    forks: 1768
+    open_issues: 75
+    language: Python
+    license: Apache-2.0
+    pushed_at: "2026-05-03T12:40:52Z"
+    description: The memory for your AI Agents in 6 lines of code
+    topics:
+      - ai
+      - ai-agents
+      - ai-memory
+      - cognitive-architecture
+      - cognitive-memory
+      - context-engineering
+      - contributions-welcome
+      - good-first-issue
+      - good-first-pr
+      - graph-database
+      - graph-rag
+      - graphrag
+      - help-wanted
+      - knowledge
+      - knowledge-graph
+      - neo4j
+      - open-source
+      - openai
+      - rag
+      - vector-database
+    technique_match_reasons:
+      - "required_any=agent,agents,context,memory,rag"
+      - technique_score=8
+    matched_queries:
+      - "ai agent memory rag stars:>100 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: mindfold-ai/Trellis
+    url: "https://github.com/mindfold-ai/Trellis"
+    status: candidate
+    score: 171
+    technique_score: 9
+    stars: 7065
+    previous_stars: null
+    star_delta: 0
+    forks: 393
+    open_issues: 7
+    language: TypeScript
+    license: AGPL-3.0
+    pushed_at: "2026-05-03T12:11:06Z"
+    description: The best agent harness.
+    topics:
+      - agentic-coding
+      - ai-workflow
+      - claudecode
+      - codex
+      - harness
+    technique_match_reasons:
+      - "required_any=agent,agentic,harness,workflow"
+      - technique_score=9
+    matched_queries:
+      - "agent harness stars:>50 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: HolmesGPT/holmesgpt
+    url: "https://github.com/HolmesGPT/holmesgpt"
+    status: candidate
+    score: 147
+    technique_score: 15
+    stars: 2349
+    previous_stars: null
+    star_delta: 0
+    forks: 328
+    open_issues: 235
+    language: Python
+    license: Apache-2.0
+    pushed_at: "2026-05-03T11:04:41Z"
+    description: SRE Agent - CNCF Sandbox Project
+    topics:
+      - aiops
+      - chatbot
+      - chatops
+      - devops
+      - devops-tools
+      - incident
+      - incident-management
+      - incident-response
+      - jira
+      - kubernetes
+      - llm
+      - llm-agent
+      - llm-framework
+      - llms
+      - monitoring
+      - observability
+      - prometheus
+      - site-reliability-engineering
+      - slack
+      - sre
+    technique_match_reasons:
+      - "required_any=agent,llm,observability,tool,tools,framework,sandbox"
+      - technique_score=15
+    matched_queries:
+      - "llm observability agents stars:>100 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: BlazeUp-AI/Observal
+    url: "https://github.com/BlazeUp-AI/Observal"
+    status: candidate
+    score: 137
+    technique_score: 19
+    stars: 839
+    previous_stars: null
+    star_delta: 0
+    forks: 78
+    open_issues: 66
+    language: Python
+    license: NOASSERTION
+    pushed_at: "2026-05-03T09:12:27Z"
+    description: Observal is an AI agent registry with first in class observabilty and eval framework
+    topics:
+      - agents
+      - claude-code
+      - cli-tool
+      - cursor
+      - evaluation
+      - gemini-cli
+      - kiro
+      - large-language-models
+      - llm
+      - llm-evaluation
+      - llm-observability
+      - llmops
+      - monitoring
+      - observability
+      - open-source
+      - playground
+      - self-hosted
+    technique_match_reasons:
+      - "required_any=agent,agents,llm,eval,evaluation,observability,tool,framework"
+      - technique_score=19
+    matched_queries:
+      - "agent eval framework stars:>100 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: shinpr/ai-coding-project-boilerplate
+    url: "https://github.com/shinpr/ai-coding-project-boilerplate"
+    status: candidate
+    score: 130
+    technique_score: 18
+    stars: 205
+    previous_stars: null
+    star_delta: 0
+    forks: 20
+    open_issues: 0
+    language: JavaScript
+    license: MIT
+    pushed_at: "2026-05-03T05:05:22Z"
+    description: Agentic coding TypeScript boilerplate for Claude Code — sub-agent workflows with built-in quality checks and context engineering.
+    topics:
+      - agent-skills
+      - agentic-ai
+      - agentic-workflow
+      - ai-agents
+      - boilerplate
+      - claude-code
+      - developer-tools
+      - llm-orchestration
+      - productivity
+      - quality-gates
+      - skills
+      - typescript
+    technique_match_reasons:
+      - "required_any=agent,agents,agentic,llm,workflow,context,tool,tools"
+      - technique_score=18
+    matched_queries:
+      - "agentic engineering workflow stars:>50 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: Prompthon-IO/agent-systems-handbook
+    url: "https://github.com/Prompthon-IO/agent-systems-handbook"
+    status: candidate
+    score: 129
+    technique_score: 39
+    stars: 107
+    previous_stars: null
+    star_delta: 0
+    forks: 22
+    open_issues: 14
+    language: MDX
+    license: NOASSERTION
+    pushed_at: "2026-05-03T11:48:19Z"
+    description: "A practical AI agents handbook covering agent systems, agentic workflows, LangGraph, MCP, A2A, context engineering, agent memory, evaluation, observability, and multi-agent architecture."
+    topics:
+      - a2a
+      - agent-framework
+      - agent-memory
+      - agentic-ai
+      - agentic-workflow
+      - ai-agent
+      - ai-agents
+      - autonomous-agents
+      - context-engineering
+      - deep-research
+      - developer-tools
+      - generative-ai
+      - langgraph
+      - llm-agents
+      - llm-applications
+      - mcp
+      - multi-agent-systems
+      - prompt-engineering
+      - rag
+      - workflow-automation
+    technique_match_reasons:
+      - "required_any=agent,agents,agentic,llm,eval,evaluation,observability,prompt"
+      - technique_score=39
+    matched_queries:
+      - "agentic engineering workflow stars:>50 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: doobidoo/mcp-memory-service
+    url: "https://github.com/doobidoo/mcp-memory-service"
+    status: candidate
+    score: 128
+    technique_score: 12
+    stars: 1768
+    previous_stars: null
+    star_delta: 0
+    forks: 269
+    open_issues: 6
+    language: Python
+    license: Apache-2.0
+    pushed_at: "2026-05-03T11:59:31Z"
+    description: "Open-source persistent memory for AI agent pipelines (LangGraph, CrewAI, AutoGen) and Claude. REST API + knowledge graph + autonomous consolidation."
+    topics:
+      - agent-memory
+      - agentic-ai
+      - ai-agents
+      - autogen
+      - claude
+      - crewai
+      - knowledge-graph
+      - langgraph
+      - long-term-memory
+      - mcp
+      - mcp-server
+      - memory
+      - model-context-protocol
+      - multi-agent
+      - open-source
+      - rag
+      - semantic-search
+      - sqlite-vec
+      - vector-database
+      - vector-storage
+    technique_match_reasons:
+      - "required_any=agent,agents,agentic,context,memory,rag,mcp"
+      - technique_score=12
+    matched_queries:
+      - "ai agent memory rag stars:>100 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: stevesolun/ctx
+    url: "https://github.com/stevesolun/ctx"
+    status: candidate
+    score: 120
+    technique_score: 15
+    stars: 290
+    previous_stars: null
+    star_delta: 0
+    forks: 39
+    open_issues: 1
+    language: Python
+    license: MIT
+    pushed_at: "2026-05-03T12:40:47Z"
+    description: "Skill, agent, MCP, and harness catalog for Claude Code/custom LLMs: 104,078-node LLM-wiki graph, 92,815 skills, 10,786 MCPs, 13 harnesses, and capped execution recommendations."
+    topics:
+      - agents
+      - ai-agents
+      - anthropic
+      - automation
+      - claude
+      - claude-code
+      - context-management
+      - developer-tools
+      - harness
+      - knowledge-graph
+      - llm
+      - llm-wiki
+      - mcp
+      - micro-skills
+      - obsidian
+      - real-time
+      - recommendation-engine
+      - skill-management
+      - skills
+      - wiki
+    technique_match_reasons:
+      - "required_any=agent,agents,llm,harness,context,mcp,tool,tools"
+      - technique_score=15
+    matched_queries:
+      - "agent harness stars:>50 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: EgoAlpha/prompt-in-context-learning
+    url: "https://github.com/EgoAlpha/prompt-in-context-learning"
+    status: candidate
+    score: 119
+    technique_score: 9
+    stars: 2230
+    previous_stars: null
+    star_delta: 0
+    forks: 192
+    open_issues: 6
+    language: Jupyter Notebook
+    license: MIT
+    pushed_at: "2026-05-01T20:34:10Z"
+    description: "Awesome resources for in-context learning and prompt engineering: Mastery of the LLMs such as ChatGPT, GPT-3, and FlanT5, with up-to-date and cutting-edge updates."
+    topics:
+      - ai-agent
+      - chain-of-thought
+      - chatbot
+      - chatgpt
+      - chatgpt-api
+      - cot
+      - in-context-learning
+      - language-modeling
+      - large-language-model
+      - llm
+      - pre-training
+      - prompt
+      - prompt-based-learning
+      - prompt-engineering
+      - prompt-learning
+    technique_match_reasons:
+      - "required_any=agent,llm,prompt,context"
+      - technique_score=9
+    matched_queries:
+      - "context engineering llm stars:>100 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: zenml-io/kitaru
+    url: "https://github.com/zenml-io/kitaru"
+    status: candidate
+    score: 119
+    technique_score: 15
+    stars: 135
+    previous_stars: null
+    star_delta: 0
+    forks: 6
+    open_issues: 35
+    language: Python
+    license: Apache-2.0
+    pushed_at: "2026-05-03T10:05:19Z"
+    description: Open-source platform layer for AI agents in production
+    topics:
+      - agent-framework
+      - ai-agents
+      - checkpoints
+      - durable-execution
+      - llm
+      - mcp
+      - mlops
+      - observability
+      - pydantic
+      - pydantic-ai
+      - python
+      - replay
+      - workflow-orchestration
+    technique_match_reasons:
+      - "required_any=agent,agents,llm,observability,workflow,mcp,framework,orchestration"
+      - technique_score=15
+    matched_queries:
+      - "llm observability agents stars:>100 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: first-fluke/oh-my-agent
+    url: "https://github.com/first-fluke/oh-my-agent"
+    status: candidate
+    score: 116
+    technique_score: 12
+    stars: 880
+    previous_stars: null
+    star_delta: 0
+    forks: 102
+    open_issues: 1
+    language: TypeScript
+    license: MIT
+    pushed_at: "2026-05-03T11:40:54Z"
+    description: "Portable multi-agent harness for .agents-based skills, workflows, and standards-aware agent teams across Antigravity, Claude Code, Codex, Cursor, OpenCode, and more."
+    topics:
+      - agent-harness
+      - agent-skills
+      - agentic-coding
+      - ai-agents
+      - claude-code
+      - codex
+      - cursor
+      - multi-agent
+      - multi-agent-systems
+      - oh-my-agent
+      - opencode
+      - orchestration
+      - orchestrator
+      - serena
+    technique_match_reasons:
+      - "required_any=agent,agents,agentic,harness,workflow,orchestration"
+      - technique_score=12
+    matched_queries:
+      - "claude code agents workflow stars:>100 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: Alex8791-cyber/cognithor
+    url: "https://github.com/Alex8791-cyber/cognithor"
+    status: candidate
+    score: 115
+    technique_score: 14
+    stars: 121
+    previous_stars: null
+    star_delta: 0
+    forks: 18
+    open_issues: 2
+    language: Python
+    license: Apache-2.0
+    pushed_at: "2026-05-03T12:39:39Z"
+    description: "Cognithor · Agent OS: Local-first autonomous agent operating system. 19 LLM providers, 18 channels, 145 MCP tools, 6-tier memory, Agent Packs marketplace, zero telemetry. Python 3.12+, Apache 2.0."
+    topics:
+      - agent-os
+      - ai-agent
+      - anthropic
+      - autonomous-agent
+      - discord-bot
+      - document-analysis
+      - gdpr-compliant
+      - gemini
+      - hierarchical-retrieval
+      - knowledge-graph
+      - knowledge-synthesis
+      - knowledge-vault
+      - llm
+      - local-first
+      - mcp
+      - multi-llm
+      - obsidian
+      - ollama
+      - openai
+      - telegram-bot
+    technique_match_reasons:
+      - "required_any=agent,llm,eval,memory,mcp,tool,tools"
+      - technique_score=14
+    matched_queries:
+      - "mcp tools agent stars:>100 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: strands-agents/evals
+    url: "https://github.com/strands-agents/evals"
+    status: candidate
+    score: 99
+    technique_score: 10
+    stars: 118
+    previous_stars: null
+    star_delta: 0
+    forks: 33
+    open_issues: 52
+    language: Python
+    license: Apache-2.0
+    pushed_at: "2026-05-01T14:55:47Z"
+    description: A comprehensive evaluation framework for AI agents and LLM applications.
+    topics:
+      - agentic
+      - agentic-ai
+      - ai
+      - evaluation
+      - machine-learning
+      - python
+      - strands-agents
+    technique_match_reasons:
+      - "required_any=agent,agents,agentic,llm,eval,evaluation,framework"
+      - technique_score=10
+    matched_queries:
+      - "agent eval framework stars:>100 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: Wirasm/PRPs-agentic-eng
+    url: "https://github.com/Wirasm/PRPs-agentic-eng"
+    status: candidate
+    score: 95
+    technique_score: 11
+    stars: 2155
+    previous_stars: null
+    star_delta: 0
+    forks: 613
+    open_issues: 14
+    language: Python
+    license: NOASSERTION
+    pushed_at: "2026-03-02T11:01:28Z"
+    description: "Prompts, workflows and more for agentic engineering"
+    topics:
+    technique_match_reasons:
+      - "required_any=agent,agentic,prompt,workflow"
+      - technique_score=11
+    matched_queries:
+      - "prompt engineering workflow agent stars:>50 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: typedef-ai/fenic
+    url: "https://github.com/typedef-ai/fenic"
+    status: candidate
+    score: 90
+    technique_score: 7
+    stars: 455
+    previous_stars: null
+    star_delta: 0
+    forks: 26
+    open_issues: 26
+    language: Python
+    license: Apache-2.0
+    pushed_at: "2026-04-28T16:38:52Z"
+    description: Declarative context engineering for agents
+    topics:
+      - agents
+      - ai
+      - ai-agents
+      - llm
+    technique_match_reasons:
+      - "required_any=agent,agents,llm,context"
+      - technique_score=7
+    matched_queries:
+      - "context engineering llm stars:>100 pushed:>=2026-01-01"
+    review_action: human_review_required

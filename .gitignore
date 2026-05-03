@@ -1,0 +1,11 @@
+# Runtime / local agent state
+.omx/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
