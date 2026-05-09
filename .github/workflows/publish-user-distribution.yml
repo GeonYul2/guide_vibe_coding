@@ -1,0 +1,107 @@
+name: publish-user-distribution
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_repository:
+        description: 'Target user distribution repository, for example owner/agent-guide-user'
+        required: true
+      target_branch:
+        description: 'Base branch in the target repository'
+        required: false
+        default: 'main'
+      pr_branch:
+        description: 'Optional publish branch name; defaults to automation/agent-guide-user-distribution-<run_id>'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Only show the target diff; do not commit, push, or open a PR'
+        required: false
+        type: boolean
+        default: true
+      prune_excluded:
+        description: 'Remove manifest-excluded legacy source/maintainer paths from the target checkout'
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-user-distribution-${{ github.event.inputs.target_repository }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source maintainer repo
+        uses: actions/checkout@v4
+        with:
+          path: source
+
+      - name: Check out target user distribution repo
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.target_repository }}
+          ref: ${{ inputs.target_branch }}
+          token: ${{ secrets.USER_DISTRIBUTION_TOKEN }}
+          path: target
+
+      - name: Export user-facing subset
+        run: |
+          PRUNE_ARG=""
+          if [ "${{ inputs.prune_excluded }}" = "true" ]; then
+            PRUNE_ARG="--prune-excluded"
+          fi
+          python3 source/maintainer/scripts/export_user_distribution.py --dest target $PRUNE_ARG
+
+      - name: Show target diff
+        run: |
+          cd target
+          git status --short
+          git diff --stat
+
+      - name: Stop after dry run
+        if: ${{ inputs.dry_run }}
+        run: echo "Dry run requested; not committing, pushing, or opening a PR."
+
+      - name: Commit and open target PR
+        if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ secrets.USER_DISTRIBUTION_TOKEN }}
+          TARGET_REPOSITORY: ${{ inputs.target_repository }}
+          TARGET_BRANCH: ${{ inputs.target_branch }}
+          INPUT_PR_BRANCH: ${{ inputs.pr_branch }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          cd target
+          if git diff --quiet -- .; then
+            echo "No user distribution changes to publish."
+            exit 0
+          fi
+          BRANCH="$INPUT_PR_BRANCH"
+          if [ -z "$BRANCH" ]; then
+            BRANCH="automation/agent-guide-user-distribution-$RUN_ID"
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add -A
+          git commit -m "Publish user-facing agent guide subset
+
+Constraint: Target repository receives only manifest-selected runtime files.
+Rejected: Copy maintainer radar/update automation | User distributions must not carry upstream discovery logic.
+Confidence: medium
+Scope-risk: narrow
+Directive: Update distribution/user-export-manifest.yaml before changing what is published.
+Tested: maintainer/scripts/export_user_distribution.py completed in CI.
+Not-tested: Target repository runtime behavior beyond exported file diff."
+          git push --set-upstream origin "$BRANCH"
+          gh pr create \
+            --repo "$TARGET_REPOSITORY" \
+            --base "$TARGET_BRANCH" \
+            --head "$BRANCH" \
+            --title "Publish user-facing agent guide subset" \
+            --body "Exports only the manifest-selected user-facing agent-helper files from the source/maintainer repository. Maintainer radar, discovery automation, generated wiki, local runtime state, and update logic are excluded."

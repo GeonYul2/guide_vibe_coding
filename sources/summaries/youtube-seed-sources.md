@@ -68,7 +68,7 @@ Enforcement point:
 
 - `workflows/source-ingestion.md`
 - `sources/registry.yaml`
-- `repos/radar-config.yaml`
+- `maintainer/radar-config.yaml`
 
 Agent behavior:
 

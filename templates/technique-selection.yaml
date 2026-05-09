@@ -1,5 +1,7 @@
 # Select or reject every technique from techniques/registry.yaml.
 selected:
+  - id: standardized_intake_gate
+    reason: TODO
   - id: deep_interview
     reason: TODO
   - id: harness_engineering
@@ -49,5 +51,11 @@ selected:
   - id: default_response_brevity
     reason: TODO
   - id: agent_readiness_scoring
+    reason: TODO
+  - id: llm_wiki_context_compilation
+    reason: TODO
+  - id: wiki_first_source_verification
+    reason: TODO
+  - id: obsidian_graph_knowledge_ops
     reason: TODO
 rejected: []

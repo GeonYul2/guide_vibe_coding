@@ -1,15 +1,19 @@
 version: 0.3.0
 purpose: >
   Machine-readable execution contract for agents building automation agents with this repository.
-  The primary refresh loop discovers hot GitHub technique repositories; videos/articles are supplemental source ingestion.
+  Ordinary users follow the core build-agent workflow. Maintainers use the optional refresh loop to discover hot GitHub technique repositories; videos/articles are supplemental source ingestion.
 default_workflow: workflows/build-agent.md
 required_boot_files:
   - AGENTS.md
   - agent-playbook.yaml
   - techniques/registry.yaml
   - techniques/taxonomy.yaml
+  - workflows/intake.md
   - workflows/build-agent.md
 required_artifacts:
+  - path: intake-form.md
+    template: templates/intake-form.md
+    gate: before_deep_interview_or_implementation
   - path: agent-prd.md
     template: templates/agent-prd.md
     gate: before_implementation
@@ -56,6 +60,7 @@ required_artifacts:
     template: templates/implementation-plan.md
     gate: before_implementation
 mandatory_technique_consideration:
+  - standardized_intake_gate
   - deep_interview
   - harness_engineering
   - eval_regression_loop
@@ -81,19 +86,24 @@ mandatory_technique_consideration:
   - source_backed_technique_ingestion
   - default_response_brevity
   - agent_readiness_scoring
+  - obsidian_graph_knowledge_ops
+  - wiki_first_source_verification
+  - llm_wiki_context_compilation
 validation:
   command: python3 scripts/validate_agent_task.py tasks/<task-slug>
   required_before_claims:
+    - intake_complete
     - ready_for_implementation
     - implementation_complete
 technique_discovery_policy:
+  audience: maintainers_only
   primary_source: github_repositories
-  scheduler: .github/workflows/weekly-repo-radar.yml
-  config: repos/radar-config.yaml
-  script: scripts/weekly_repo_radar.py
+  manual_workflow: .github/workflows/weekly-repo-radar.yml
+  config: maintainer/radar-config.yaml
+  script: maintainer/scripts/weekly_repo_radar.py
   output:
-    - repos/radar/YYYY-MM-DD.md
-    - repos/radar/YYYY-MM-DD-candidates.yaml
+    - maintainer/radar/YYYY-MM-DD.md
+    - maintainer/radar/YYYY-MM-DD-candidates.yaml
   supplemental_sources:
     - youtube
     - articles
@@ -104,6 +114,6 @@ external_repo_policy:
   allowed_storage:
     - repos/registry.yaml
     - repos/summaries/*.md
-    - repos/radar/*.md
-    - repos/radar/*-candidates.yaml
-  update_workflow: workflows/weekly-repo-radar.md
+    - maintainer/radar/*.md
+    - maintainer/radar/*-candidates.yaml
+  update_workflow: maintainer/workflows/weekly-repo-radar.md

@@ -1,0 +1,219 @@
+{
+  "generated_at": "2026-05-09T10:21:31+00:00",
+  "technique": {
+    "id": "agent_readiness_scoring",
+    "source": "techniques/registry.yaml",
+    "wiki": "wiki/techniques/agent_readiness_scoring.md"
+  },
+  "summary": {
+    "score": 100.0,
+    "weight": 100,
+    "status": "ready-for-maintainer-use",
+    "top_gaps": [],
+    "task_portfolio_average": 79.0
+  },
+  "areas": [
+    {
+      "name": "Boot/control contract",
+      "weight": 12,
+      "score": 12.0,
+      "evidence": [
+        "agent-playbook.yaml exists and declares the execution contract.",
+        "AGENTS.md includes the repository operating contract and brevity policy.",
+        "workflows/build-agent.md is available for build/evaluate flows.",
+        "workflows/intake.md defines the standardized intake gate.",
+        "README.md documents readiness-scorecard use.",
+        "SECURITY.md is present for clone/runtime safety boundaries."
+      ],
+      "gaps": [],
+      "files": [
+        "AGENTS.md",
+        "README.md",
+        "SECURITY.md",
+        "agent-playbook.yaml",
+        "workflows/build-agent.md",
+        "workflows/intake.md"
+      ]
+    },
+    {
+      "name": "Technique registry coverage",
+      "weight": 14,
+      "score": 14.0,
+      "evidence": [
+        "Registry has 29 unique technique ids.",
+        "Playbook mandatory technique list matches the registry.",
+        "Taxonomy technique references resolve to registry ids.",
+        "Technique-selection template considers every registry technique."
+      ],
+      "gaps": [],
+      "files": [
+        "agent-playbook.yaml",
+        "techniques/registry.yaml",
+        "techniques/taxonomy.yaml",
+        "templates/technique-selection.yaml"
+      ]
+    },
+    {
+      "name": "Artifact templates and scaffolding",
+      "weight": 14,
+      "score": 14.0,
+      "evidence": [
+        "Playbook declares 16 required task artifacts.",
+        "Every playbook-required artifact has a template.",
+        "Task scaffolder reads artifact requirements from the playbook.",
+        "Task validator reads artifact requirements from the playbook.",
+        "Validator enforces readiness-scorecard arithmetic."
+      ],
+      "gaps": [],
+      "files": [
+        "agent-playbook.yaml",
+        "scripts/new_agent_task.py",
+        "scripts/validate_agent_task.py",
+        "templates/"
+      ]
+    },
+    {
+      "name": "Existing task scorecard governance",
+      "weight": 16,
+      "score": 16.0,
+      "evidence": [
+        "2 task scorecard(s) found; average task readiness is 79.0/100.",
+        "Every discovered task scorecard has a numeric readiness score.",
+        "2/2 task validators passed.",
+        "Every task scorecard has an explicit gate decision, so prototype/live-readiness limits are visible.",
+        "Lower-scoring tasks are explicitly bounded as prototype/not-live-ready, so they are portfolio insight rather than a repo-control failure."
+      ],
+      "gaps": [],
+      "files": [
+        "maintainer/tasks/github-technique-radar-agent/readiness-scorecard.md",
+        "tasks/customer-email-reply-agent/readiness-scorecard.md"
+      ]
+    },
+    {
+      "name": "Evaluation and verification harness",
+      "weight": 14,
+      "score": 14.0,
+      "evidence": [
+        "Repository-level contract test suite exists.",
+        "Tests cover scaffolding and validator behavior.",
+        "Tests verify existing task readiness scorecards.",
+        "Manual validation workflow exists.",
+        "Fresh test run passed: /opt/homebrew/opt/python@3.14/bin/python3.14 scripts/test_agent_guide.py"
+      ],
+      "gaps": [],
+      "files": [
+        ".github/workflows/validate.yml",
+        "scripts/test_agent_guide.py"
+      ]
+    },
+    {
+      "name": "Wiki and source verification",
+      "weight": 10,
+      "score": 10.0,
+      "evidence": [
+        "Wiki index exists and preserves source-of-truth boundary.",
+        "Technique map exists for graph orientation.",
+        "Registry source bridge exists.",
+        "Task wiki pages exist.",
+        "Obsidian graph configuration exists."
+      ],
+      "gaps": [],
+      "files": [
+        ".obsidian/graph.json",
+        "wiki/index.md",
+        "wiki/sources/techniques-registry.md",
+        "wiki/tasks/",
+        "wiki/technique-map.md"
+      ]
+    },
+    {
+      "name": "Maintainer discovery/radar loop",
+      "weight": 10,
+      "score": 10.0,
+      "evidence": [
+        "Maintainer radar scoring script exists.",
+        "Maintainer radar config exists.",
+        "Maintainer radar workflow exists.",
+        "Weekly radar GitHub workflow is manual-dispatchable.",
+        "Radar candidate artifacts exist for review."
+      ],
+      "gaps": [],
+      "files": [
+        ".github/workflows/weekly-repo-radar.yml",
+        "maintainer/radar-config.yaml",
+        "maintainer/radar/",
+        "maintainer/scripts/weekly_repo_radar.py",
+        "maintainer/workflows/weekly-repo-radar.md"
+      ]
+    },
+    {
+      "name": "Security, privacy, and distribution posture",
+      "weight": 8,
+      "score": 8.0,
+      "evidence": [
+        "SECURITY.md documents external repository execution boundary.",
+        "User distribution manifest exists.",
+        "User distribution overrides AGENTS/playbook.",
+        "Publish workflow requires explicit target token."
+      ],
+      "gaps": [],
+      "files": [
+        ".github/workflows/publish-user-distribution.yml",
+        "SECURITY.md",
+        "distribution/user-export-manifest.yaml",
+        "distribution/user/AGENTS.md",
+        "distribution/user/agent-playbook.yaml"
+      ]
+    },
+    {
+      "name": "HTML report operability",
+      "weight": 2,
+      "score": 2.0,
+      "evidence": [
+        "HTML report generator exists.",
+        "Report can be emitted as a static local HTML file."
+      ],
+      "gaps": [],
+      "files": [
+        "reports/repo-readiness-report.html",
+        "scripts/generate_repo_score_report.py"
+      ]
+    }
+  ],
+  "scorecards": [
+    {
+      "path": "tasks/customer-email-reply-agent/readiness-scorecard.md",
+      "title": "Readiness Scorecard: customer-email-reply-agent",
+      "score": 72,
+      "status": "not explicitly stated",
+      "gate_decision": "Ready for prototype artifact design, not ready for live integration or automatic external sending."
+    },
+    {
+      "path": "maintainer/tasks/github-technique-radar-agent/readiness-scorecard.md",
+      "title": "Agent Readiness Scorecard: GitHub Technique Radar Agent",
+      "score": 86,
+      "status": "ready-for-prototype",
+      "gate_decision": "- Decision: proceed - Reason: Required design gates are complete enough for a small REST-first prototype that only writes radar artifacts and task files. - Required fixes before implementation: - Run task validator successfully. - Inspect current `maintainer/scripts/weekly_repo_radar.py` CLI and align implementation plan commands."
+    }
+  ],
+  "validation_results": [
+    {
+      "cmd": "/opt/homebrew/opt/python@3.14/bin/python3.14 scripts/validate_agent_task.py tasks/customer-email-reply-agent",
+      "returncode": 0,
+      "passed": true,
+      "output": "VALIDATION PASSED: tasks/customer-email-reply-agent"
+    },
+    {
+      "cmd": "/opt/homebrew/opt/python@3.14/bin/python3.14 scripts/validate_agent_task.py maintainer/tasks/github-technique-radar-agent",
+      "returncode": 0,
+      "passed": true,
+      "output": "VALIDATION PASSED: maintainer/tasks/github-technique-radar-agent"
+    }
+  ],
+  "test_result": {
+    "cmd": "/opt/homebrew/opt/python@3.14/bin/python3.14 scripts/test_agent_guide.py",
+    "returncode": 0,
+    "passed": true,
+    "output": "PASS test_registry_playbook_template_consistency\nPASS test_required_artifact_alignment\nPASS test_production_grade_techniques_present\nPASS test_taxonomy_references_are_valid\nPASS test_scaffold_and_validator_behavior\nPASS test_existing_task_readiness_scorecards_are_verifiable\nPASS test_radar_config_filtering_and_report_generation\nPASS test_user_distribution_export_contracts\nPASS test_security_posture_contracts\nPASS test_workflow_and_docs_contracts\nPASS test_llm_wiki_obsidian_contracts\nPASS test_repo_score_report_generation\nALL TESTS PASSED (12)"
+  }
+}

@@ -1,0 +1,61 @@
+# Select or reject every technique from techniques/registry.yaml.
+selected:
+  - id: standardized_intake_gate
+    reason: 짧은 사용자 요청을 agent idea, 입력, 출력, 승인 경계, 성공 증거로 정규화해야 하므로 hard gate로 적용한다.
+  - id: deep_interview
+    reason: 정책 출처, 승인 경계, CRM 접근 범위, 브랜드 톤이 아직 실제 사용자 확인을 필요로 한다.
+  - id: harness_engineering
+    reason: 이메일 fixture, 정책 검색 mock, 검토 큐 mock으로 반복 가능한 품질 검증이 필요하다.
+  - id: eval_regression_loop
+    reason: 잘못된 답변, 근거 누락, handoff 누락은 회귀 테스트로 고정해야 한다.
+  - id: structured_output_schema_validation
+    reason: 답변 초안, 근거, 신뢰도, handoff 판단을 JSON으로 downstream 처리해야 한다.
+  - id: failed_case_memory
+    reason: 정책 충돌, 민감정보, 법무 요청 등 실패 케이스를 재발 방지 데이터로 보존해야 한다.
+  - id: guardrails_tripwires
+    reason: 자동 발송, 보상 약속, 개인정보 노출, 법무 판단을 차단해야 한다.
+  - id: token_context_caching
+    reason: 정책 문서와 rubric이 반복 사용되므로 안전한 요약 cache가 비용을 줄인다.
+  - id: retrieval_memory_governance
+    reason: 정책 문서 검색의 출처, freshness, citation, invalidation 규칙이 핵심 품질 요건이다.
+  - id: prompt_versioning
+    reason: 답변 톤, 분류 rubric, handoff 기준 변경이 품질에 직접 영향을 준다.
+  - id: tool_contracts
+    reason: 이메일 reader, policy search, review queue writer의 권한과 실패 모드를 명확히 해야 한다.
+  - id: observability_tracing
+    reason: 문의 처리 단계, 검색 결과, handoff 판단, 비용, 오류를 추적해야 한다.
+  - id: genai_telemetry_standardization
+    reason: 운영 단계에서 품질, 비용, latency, guardrail event를 표준 metric으로 비교해야 한다.
+  - id: cost_budgeting
+    reason: 이메일과 정책 문서 context가 길어질 수 있어 run당 비용 상한이 필요하다.
+  - id: token_efficiency_budget_gate
+    reason: 업무 자동화 agent이므로 token ceiling, cache target, fallback, telemetry가 구현 전 필수다.
+  - id: model_routing_fallback_policy
+    reason: 단순 FAQ와 고위험 정책 판단을 다른 모델 tier와 escalation으로 라우팅해야 한다.
+  - id: safety_handoff_boundaries
+    reason: 외부 발송, 환불, 법무·보안 답변은 사람 승인 경계가 필요하다.
+  - id: security_privacy_data_governance
+    reason: 고객 이메일, CRM metadata, 민감정보를 다루므로 classification과 redaction이 필수다.
+  - id: deployment_rollout_canary
+    reason: 상담원 보조 도구라도 내부 canary와 kill switch 없이 확대하면 위험하다.
+  - id: concise_operating_contract
+    reason: 상담원과 운영자가 반복 사용하는 agent라 짧고 강제 가능한 운영 규칙이 필요하다.
+  - id: scope_control_and_minimal_diff
+    reason: 첫 버전은 초안 작성과 handoff에 집중하고 외부 상태 변경을 피해야 한다.
+  - id: agent_harness_runtime_design
+    reason: retrieval, model call, tool execution, retry, trace를 harness로 분리해야 한다.
+  - id: permissioned_tool_execution
+    reason: 읽기/쓰기 권한과 자동 발송 금지를 tool layer에서 강제해야 한다.
+  - id: default_response_brevity
+    reason: 상담원 화면에는 근거 중심의 짧은 요약과 명확한 next action이 필요하다.
+  - id: agent_readiness_scoring
+    reason: 구현 전 정책 출처, tool contracts, eval, security gap을 점수화해야 한다.
+rejected:
+  - id: source_backed_technique_ingestion
+    reason: 이 작업은 새 agent-engineering technique을 외부 source에서 채택하는 일이 아니라 업무 agent를 설계하는 일이므로 이번 prototype 범위에서는 적용하지 않는다.
+  - id: llm_wiki_context_compilation
+    reason: 고객 이메일 답변 agent의 첫 범위는 정책 검색과 답변 초안 생성이며, 다수의 Markdown/YAML/code artifact를 wiki로 컴파일해 탐색하는 운영 요구는 없다.
+  - id: wiki_first_source_verification
+    reason: 이 agent는 생성 wiki가 아니라 승인된 정책 문서와 CRM metadata를 직접 source of truth로 삼으므로 wiki-first 검증 절차는 적용하지 않는다.
+  - id: obsidian_graph_knowledge_ops
+    reason: 상담 업무 prototype에는 Obsidian graph로 technique/workflow/task 관계를 시각 검토하는 human knowledge-ops 요구가 없다.

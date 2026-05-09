@@ -1,0 +1,61 @@
+# Select or reject every technique from techniques/registry.yaml.
+selected:
+  - id: standardized_intake_gate
+    reason: The radar task now starts from a normalized intake form so future sessions test the same user intent, boundaries, forbidden sources, and evidence criteria before selecting techniques.
+  - id: deep_interview
+    reason: User intent is clear enough for a first design, but the PRD records boundaries and open questions before implementation.
+  - id: harness_engineering
+    reason: Radar runs must be repeatable with mocked GitHub responses, cached fixtures, and deterministic scoring tests.
+  - id: eval_regression_loop
+    reason: Ranking quality, schema validity, and guardrail behavior can regress as queries and scoring evolve.
+  - id: structured_output_schema_validation
+    reason: The agent emits YAML and Markdown artifacts consumed by humans, scripts, and future automation.
+  - id: failed_case_memory
+    reason: API failures, noisy repositories, invalid metadata, and prohibited-source attempts must become regression cases.
+  - id: guardrails_tripwires
+    reason: The agent must block forbidden crawling, vendoring, auto-adoption, secrets exposure, and uncontrolled external calls.
+  - id: token_context_caching
+    reason: Repeated repository summaries and README snippets should be cached and pruned to control token and API cost.
+  - id: retrieval_memory_governance
+    reason: Source hierarchy, freshness, allowed sources, and retention rules are central to repository discovery.
+  - id: prompt_versioning
+    reason: Summarization and classification rubrics influence candidate ranking and must be versioned with eval impact.
+  - id: tool_contracts
+    reason: GitHub API, local scripts, validators, cache files, and optional PR creation need explicit permissions and failure modes.
+  - id: observability_tracing
+    reason: Radar decisions need traceable query, scoring, cache, rate-limit, and output events.
+  - id: genai_telemetry_standardization
+    reason: If model-assisted summarization is added, token, latency, cache, quality, and error events need consistent fields.
+  - id: cost_budgeting
+    reason: Scheduled discovery can create recurring API and model cost if not bounded.
+  - id: token_efficiency_budget_gate
+    reason: The discovery agent is a recurring automation with model-assisted summarization, so explicit token ceilings and telemetry are required.
+  - id: model_routing_fallback_policy
+    reason: Metadata collection can be deterministic, while technique extraction may route to cheaper or stronger models by complexity.
+  - id: safety_handoff_boundaries
+    reason: Adoption, mandatory technique changes, credentials, and publication require human approval.
+  - id: security_privacy_data_governance
+    reason: GitHub tokens, logs, cache files, and repository metadata must avoid secrets and sensitive data leakage.
+  - id: deployment_rollout_canary
+    reason: Manual maintainer runs and PR creation need staged rollout, kill switch, and rollback rules.
+  - id: concise_operating_contract
+    reason: The radar agent should have a compact, enforceable operating contract for future maintainers and coding agents.
+  - id: scope_control_and_minimal_diff
+    reason: Repository guide changes should be small, reviewable, and limited to radar artifacts unless explicitly approved.
+  - id: agent_harness_runtime_design
+    reason: The agent combines API calls, cache, scoring, schema validation, retries, and manual execution.
+  - id: permissioned_tool_execution
+    reason: External API access, local file writes, and possible PR creation require allowlists and approval boundaries.
+  - id: source_backed_technique_ingestion
+    reason: The agent's core job is source-backed discovery and review-ready ingestion of reusable techniques.
+  - id: default_response_brevity
+    reason: Human progress reports and PR summaries should stay concise unless reviewers request detail.
+  - id: agent_readiness_scoring
+    reason: Implementation must not start until readiness gaps are visible and the validator passes.
+  - id: llm_wiki_context_compilation
+    reason: The radar guide now maintains a generated wiki layer so agents and humans can navigate technique, workflow, task, and source relationships without treating summaries as canonical source.
+  - id: wiki_first_source_verification
+    reason: Radar and wiki summaries must be used for orientation, then verified against canonical YAML, Markdown, scripts, and source URLs before changing registry behavior.
+  - id: obsidian_graph_knowledge_ops
+    reason: Obsidian graph review helps detect orphaned techniques, missing task links, and weak source coverage across the guide.
+rejected: []

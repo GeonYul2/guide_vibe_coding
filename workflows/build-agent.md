@@ -17,7 +17,27 @@ Create a task folder:
 python3 scripts/new_agent_task.py "<task-slug>"
 ```
 
-## 1. Deep Interview Gate
+## 1. Standardized Intake Gate
+
+Fill `intake-form.md` first. This is the normalized user-start contract and must cover:
+
+- agent idea
+- primary user
+- workflow pain
+- input and output
+- allowed autonomous actions
+- human approval required
+- forbidden actions and non-goals
+- success examples
+- failure / edge cases
+- tools / data access
+- evidence of success
+
+If any field is missing, vague, or marked `Unknown - follow up required`, run `workflows/deep-interview.md` before PRD synthesis, technique selection, or implementation.
+
+Translate completed intake into `agent-prd.md`; do not skip the PRD.
+
+## 2. Deep Interview Gate
 
 If any of the following are unclear, run `workflows/deep-interview.md` before implementation:
 
@@ -30,7 +50,7 @@ If any of the following are unclear, run `workflows/deep-interview.md` before im
 - Human approval boundaries
 - Failure handling expectations
 
-## 2. Technique Selection Gate
+## 3. Technique Selection Gate
 
 Fill `technique-selection.yaml`.
 
@@ -41,7 +61,7 @@ Use `techniques/taxonomy.yaml` to classify the agent context and prioritize must
 
 Do not silently ignore techniques.
 
-## 3. Structured Output Gate
+## 4. Structured Output Gate
 
 Fill `output-schema.md` before coding.
 
@@ -53,7 +73,7 @@ Minimum schema contract:
 - valid and invalid golden examples
 - eval cases that prove schema compliance
 
-## 4. Harness / Eval Gate
+## 5. Harness / Eval Gate
 
 Fill `eval-spec.md` before coding.
 
@@ -66,7 +86,7 @@ Minimum eval plan:
 - invalid structured output path
 - known regression cases
 
-## 5. Guardrail Gate
+## 6. Guardrail Gate
 
 Fill `guardrails.md`.
 
@@ -78,7 +98,7 @@ Define:
 - human handoff triggers
 - adversarial/unsafe eval cases
 
-## 6. Tool Contract Gate
+## 7. Tool Contract Gate
 
 Fill `tool-contracts.md` for every API/script/database/browser/internal service.
 
@@ -93,7 +113,7 @@ Include:
 - error classes
 - human approval requirements
 
-## 7. Retrieval and Memory Gate
+## 8. Retrieval and Memory Gate
 
 Fill `retrieval-memory.md` when the agent uses sources, RAG, vector search, internal documents, or session/long-term memory.
 
@@ -106,7 +126,7 @@ Define:
 - freshness and invalidation rules
 - privacy filters
 
-## 8. Failure Memory Gate
+## 9. Failure Memory Gate
 
 Fill `failure-cases.md`.
 
@@ -118,7 +138,7 @@ Every observed failure must become one of:
 - guardrail/tripwire update
 - human handoff rule
 
-## 9. Token Efficiency, Cost, Caching, and Model Routing Gate
+## 10. Token Efficiency, Cost, Caching, and Model Routing Gate
 
 Fill `cost-and-caching.md` and `model-routing.md`.
 
@@ -136,7 +156,7 @@ Define:
 - token telemetry fields
 - fallback behavior when budget or quality gates fail
 
-## 10. Telemetry Gate
+## 11. Telemetry Gate
 
 Fill `telemetry.md`.
 
@@ -148,7 +168,7 @@ Define:
 - correlation ids
 - alerts and owners
 
-## 11. Security and Privacy Gate
+## 12. Security and Privacy Gate
 
 Fill `security-privacy.md` when the agent touches company/customer/internal data, credentials, logs, or regulated information.
 
@@ -161,7 +181,7 @@ Define:
 - retention/deletion
 - audit owner and cadence
 
-## 12. Release and Rollout Gate
+## 13. Release and Rollout Gate
 
 Fill `release-rollout.md` when the agent will run outside a local prototype.
 
@@ -173,11 +193,11 @@ Define:
 - rollback process
 - post-deploy eval/monitoring checks
 
-## 13. Implementation Plan Gate
+## 14. Implementation Plan Gate
 
 Fill `implementation-plan.md` with small, reversible steps and verification commands.
 
-## 14. Validate Before Implementation
+## 15. Validate Before Implementation
 
 Run:
 
@@ -187,7 +207,7 @@ python3 scripts/validate_agent_task.py tasks/<task-slug>
 
 Implementation is blocked until validation passes.
 
-## 15. Implement and Verify
+## 16. Implement and Verify
 
 After implementation:
 

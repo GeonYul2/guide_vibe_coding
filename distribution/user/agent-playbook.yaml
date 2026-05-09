@@ -1,0 +1,113 @@
+version: 0.3.0-user
+purpose: >
+  Machine-readable execution contract for agents building automation agents with
+  the user-facing distribution of this guide. Maintainer-only GitHub radar,
+  technique discovery automation, generated wiki, and publishing workflows are
+  intentionally excluded.
+default_workflow: workflows/build-agent.md
+required_boot_files:
+  - AGENTS.md
+  - agent-playbook.yaml
+  - techniques/registry.yaml
+  - techniques/taxonomy.yaml
+  - workflows/intake.md
+  - workflows/build-agent.md
+required_artifacts:
+  - path: intake-form.md
+    template: templates/intake-form.md
+    gate: before_deep_interview_or_implementation
+  - path: agent-prd.md
+    template: templates/agent-prd.md
+    gate: before_implementation
+  - path: technique-selection.yaml
+    template: templates/technique-selection.yaml
+    gate: before_implementation
+  - path: output-schema.md
+    template: templates/output-schema.md
+    gate: before_implementation
+  - path: eval-spec.md
+    template: templates/eval-spec.md
+    gate: before_implementation
+  - path: guardrails.md
+    template: templates/guardrails.md
+    gate: before_implementation
+  - path: tool-contracts.md
+    template: templates/tool-contracts.md
+    gate: before_implementation
+  - path: retrieval-memory.md
+    template: templates/retrieval-memory.md
+    gate: before_implementation
+  - path: failure-cases.md
+    template: templates/failure-cases.md
+    gate: before_implementation
+  - path: cost-and-caching.md
+    template: templates/cost-and-caching.md
+    gate: before_implementation
+  - path: model-routing.md
+    template: templates/model-routing.md
+    gate: before_implementation
+  - path: telemetry.md
+    template: templates/telemetry.md
+    gate: before_implementation
+  - path: security-privacy.md
+    template: templates/security-privacy.md
+    gate: before_implementation
+  - path: release-rollout.md
+    template: templates/release-rollout.md
+    gate: before_implementation
+  - path: readiness-scorecard.md
+    template: templates/readiness-scorecard.md
+    gate: before_implementation
+  - path: implementation-plan.md
+    template: templates/implementation-plan.md
+    gate: before_implementation
+mandatory_technique_consideration:
+  - standardized_intake_gate
+  - deep_interview
+  - harness_engineering
+  - eval_regression_loop
+  - structured_output_schema_validation
+  - failed_case_memory
+  - guardrails_tripwires
+  - token_context_caching
+  - retrieval_memory_governance
+  - prompt_versioning
+  - tool_contracts
+  - observability_tracing
+  - genai_telemetry_standardization
+  - cost_budgeting
+  - token_efficiency_budget_gate
+  - model_routing_fallback_policy
+  - safety_handoff_boundaries
+  - security_privacy_data_governance
+  - deployment_rollout_canary
+  - concise_operating_contract
+  - scope_control_and_minimal_diff
+  - agent_harness_runtime_design
+  - permissioned_tool_execution
+  - source_backed_technique_ingestion
+  - default_response_brevity
+  - agent_readiness_scoring
+  - obsidian_graph_knowledge_ops
+  - wiki_first_source_verification
+  - llm_wiki_context_compilation
+validation:
+  command: python3 scripts/validate_agent_task.py tasks/<task-slug>
+  required_before_claims:
+    - intake_complete
+    - ready_for_implementation
+    - implementation_complete
+distribution_boundary:
+  audience: ordinary_users
+  excluded:
+    - maintainer GitHub radar
+    - repository discovery automation
+    - publish workflows
+    - generated wiki and Obsidian state
+  refresh_source: source/maintainer repository only
+external_repo_policy:
+  vendoring: forbidden
+  allowed_storage:
+    - repos/registry.yaml
+    - repos/summaries/*.md
+  update_workflow: user-managed metadata only; no radar automation in this distribution

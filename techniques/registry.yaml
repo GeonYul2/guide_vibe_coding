@@ -1,5 +1,15 @@
 version: 0.3.0
 techniques:
+  - id: standardized_intake_gate
+    name: Standardized Intake Quality Gate
+    enforcement: hard_gate
+    apply_when: Every new automation-agent task, before deep interview, PRD synthesis, technique selection, or implementation.
+    output: intake-form.md and agent-prd.md
+    notes: >
+      Require a uniform first-input contract covering user, workflow pain, inputs, outputs,
+      autonomy boundaries, non-goals, examples, tool/data access, and evidence of success.
+      Missing fields must become explicit deep-interview follow-ups rather than silent assumptions.
+
   - id: deep_interview
     name: Deep Interview / Requirement Crystallization
     enforcement: mandatory_consideration
@@ -180,7 +190,7 @@ techniques:
     enforcement: mandatory_consideration
     source_refs:
       - sources/registry.yaml
-      - workflows/weekly-repo-radar.md
+      - maintainer/workflows/weekly-repo-radar.md
     apply_when: New videos, posts, docs, or repositories are added as inspiration.
     output: techniques/registry.yaml or repos/registry.yaml
     notes: >
@@ -207,3 +217,38 @@ techniques:
       eval/harness, failure memory, tool contracts, cost/caching, observability, and
       human review. Use the score to expose missing work. HTML maps are optional
       generated reports, not required backend MVP scope.
+
+  - id: llm_wiki_context_compilation
+    name: LLM Wiki Context Compilation
+    enforcement: mandatory_consideration
+    source_refs:
+      - sources/registry.yaml#article-roboco-karpathy-llm-wiki-72-run-benchmark
+    apply_when: The project has many interlinked Markdown/YAML/code artifacts that agents repeatedly need to understand.
+    output: wiki/index.md and wiki/*
+    notes: >
+      Keep original files as source of truth, then compile a Markdown wiki with stable entry points,
+      backlinks, and source references. Use the wiki to reduce repeated context loading, but verify
+      important facts against source files before changing behavior.
+
+  - id: wiki_first_source_verification
+    name: Wiki-First Source Verification
+    enforcement: mandatory_consideration
+    source_refs:
+      - sources/registry.yaml#article-roboco-karpathy-llm-wiki-72-run-benchmark
+    apply_when: An agent answers questions or plans changes from a generated wiki, summaries, or knowledge graph.
+    output: retrieval-memory.md and eval-spec.md
+    notes: >
+      Start from the wiki index for orientation, cite wiki pages, then verify decisions against canonical
+      sources such as AGENTS.md, agent-playbook.yaml, technique registries, task artifacts, code, and radar YAML.
+      Mark stale or unverified wiki claims as update tasks rather than treating them as authoritative.
+
+  - id: obsidian_graph_knowledge_ops
+    name: Obsidian Graph Knowledge Operations
+    enforcement: mandatory_consideration
+    source_refs:
+      - sources/registry.yaml#article-roboco-karpathy-llm-wiki-72-run-benchmark
+    apply_when: Humans need to inspect technique/workflow/task relationships, orphaned documents, or source coverage visually.
+    output: .obsidian/ and wiki/graph-links.md
+    notes: >
+      Use Obsidian as a local visualization layer over Git-controlled Markdown. Track graph-safe settings,
+      ignore local workspaces, and run periodic lint checks for orphaned pages, broken links, and missing source refs.

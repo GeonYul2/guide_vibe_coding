@@ -1,0 +1,200 @@
+version: 0.1.0
+generated_at: 2026-05-09
+primary_source: github_repositories
+supplemental_sources:
+  - youtube
+  - articles
+  - release_notes
+policy:
+  auto_vendor_repos: false
+  auto_modify_main_registry: false
+  human_review_required: true
+source_status: partial
+source_errors:
+  - "mcp tools agent stars:>100 pushed:>=2026-01-01: HTTP 403 {\"message\":\"API rate limit exceeded for [redacted-ip]. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\",\"documentation_url\":\"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting\"}"
+  - "ai agent memory rag governance stars:>50 pushed:>=2026-01-01: HTTP 403 {\"message\":\"API rate limit exceeded for [redacted-ip]. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\",\"documentation_url\":\"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting\"}"
+  - "llm model routing fallback agent stars:>50 pushed:>=2026-01-01: HTTP 403 {\"message\":\"API rate limit exceeded for [redacted-ip]. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\",\"documentation_url\":\"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting\"}"
+  - "ai agent security privacy guardrails stars:>50 pushed:>=2026-01-01: HTTP 403 {\"message\":\"API rate limit exceeded for [redacted-ip]. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\",\"documentation_url\":\"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting\"}"
+  - "ai agent canary rollout monitoring stars:>20 pushed:>=2026-01-01: HTTP 403 {\"message\":\"API rate limit exceeded for [redacted-ip]. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\",\"documentation_url\":\"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting\"}"
+  - "claude code agents workflow stars:>100 pushed:>=2026-01-01: HTTP 403 {\"message\":\"API rate limit exceeded for [redacted-ip]. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\",\"documentation_url\":\"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting\"}"
+  - "ai agent stars:>=5 created:>=2026-04-09: HTTP 403 {\"message\":\"API rate limit exceeded for [redacted-ip]. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\",\"documentation_url\":\"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting\"}"
+  - "ai agent stars:>=20 created:>=2026-02-08: HTTP 403 {\"message\":\"API rate limit exceeded for [redacted-ip]. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\",\"documentation_url\":\"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting\"}"
+  - "ai agent stars:>=50 pushed:>=2026-04-09: HTTP 403 {\"message\":\"API rate limit exceeded for [redacted-ip]. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\",\"documentation_url\":\"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting\"}"
+  - "ai agent stars:>=100 pushed:>=2025-11-10: HTTP 403 {\"message\":\"API rate limit exceeded for [redacted-ip]. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\",\"documentation_url\":\"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting\"}"
+queries:
+  - "agent harness stars:>50 pushed:>=2026-01-01"
+  - "agent eval framework stars:>100 pushed:>=2026-01-01"
+  - "structured outputs llm schema validation stars:>50 pushed:>=2026-01-01"
+  - "llm guardrails tripwires agent stars:>50 pushed:>=2026-01-01"
+  - "llm observability agents telemetry stars:>100 pushed:>=2026-01-01"
+  - "context engineering llm stars:>100 pushed:>=2026-01-01"
+  - "prompt caching token optimization llm agent stars:>50 pushed:>=2026-01-01"
+  - "llm cost optimization token budget agent stars:>50 pushed:>=2026-01-01"
+  - "prompt engineering workflow agent stars:>50 pushed:>=2026-01-01"
+  - "agentic engineering workflow stars:>50 pushed:>=2026-01-01"
+  - "mcp tools agent stars:>100 pushed:>=2026-01-01"
+  - "ai agent memory rag governance stars:>50 pushed:>=2026-01-01"
+  - "llm model routing fallback agent stars:>50 pushed:>=2026-01-01"
+  - "ai agent security privacy guardrails stars:>50 pushed:>=2026-01-01"
+  - "ai agent canary rollout monitoring stars:>20 pushed:>=2026-01-01"
+  - "claude code agents workflow stars:>100 pushed:>=2026-01-01"
+  - "ai agent stars:>=5 created:>=2026-04-09"
+  - "ai agent stars:>=20 created:>=2026-02-08"
+  - "ai agent stars:>=50 pushed:>=2026-04-09"
+  - "ai agent stars:>=100 pushed:>=2025-11-10"
+candidates:
+  - name: first-fluke/oh-my-agent
+    url: "https://github.com/first-fluke/oh-my-agent"
+    status: candidate
+    score: 305
+    technique_score: 12
+    stars: 919
+    previous_stars: 880
+    star_delta: 39
+    forks: 104
+    open_issues: 2
+    language: TypeScript
+    license: MIT
+    pushed_at: "2026-05-09T08:49:37Z"
+    created_at: "2026-01-30T11:29:46Z"
+    trend_velocity_score: 305
+    description: "Portable multi-agent harness for .agents-based skills, workflows, and standards-aware agent teams across Antigravity, Claude Code, Codex, Cursor, OpenCode, and more."
+    discovery_sources:
+      - static
+    topics:
+      - agent-harness
+      - agent-skills
+      - agentic-coding
+      - ai-agents
+      - claude-code
+      - codex
+      - cursor
+      - multi-agent
+      - multi-agent-systems
+      - oh-my-agent
+      - opencode
+      - orchestration
+      - orchestrator
+      - serena
+    technique_match_reasons:
+      - "required_any=agent,agents,agentic,harness,workflow,orchestration"
+      - technique_score=12
+    matched_queries:
+      - "agent harness stars:>50 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: Wirasm/PRPs-agentic-eng
+    url: "https://github.com/Wirasm/PRPs-agentic-eng"
+    status: candidate
+    score: 163
+    technique_score: 11
+    stars: 2160
+    previous_stars: 2155
+    star_delta: 5
+    forks: 613
+    open_issues: 14
+    language: Python
+    license: NOASSERTION
+    pushed_at: "2026-03-02T11:01:28Z"
+    created_at: "2025-06-21T07:13:38Z"
+    trend_velocity_score: 163
+    description: "Prompts, workflows and more for agentic engineering"
+    discovery_sources:
+      - static
+    topics: []
+    technique_match_reasons:
+      - "required_any=agent,agentic,prompt,workflow"
+      - technique_score=11
+    matched_queries:
+      - "prompt engineering workflow agent stars:>50 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: NeoLabHQ/context-engineering-kit
+    url: "https://github.com/NeoLabHQ/context-engineering-kit"
+    status: candidate
+    score: 135
+    technique_score: 4
+    stars: 980
+    previous_stars: null
+    star_delta: 0
+    forks: 89
+    open_issues: 6
+    language: TypeScript
+    license: GPL-3.0
+    pushed_at: "2026-05-06T01:02:51Z"
+    created_at: "2025-11-13T23:23:04Z"
+    trend_velocity_score: 135
+    description: "Hand-crafted Claude Code Skills focused on improving agent results quality. Compatible with OpenCode, Cursor, Antigravity, Gemini CLI, and others."
+    discovery_sources:
+      - static
+    topics:
+      - agent
+      - ai
+      - claude
+      - cline
+      - cursor
+      - llm
+      - marketplace
+      - opencode
+      - windsurf
+    technique_match_reasons:
+      - "required_any=agent,llm,context"
+      - technique_score=4
+    matched_queries:
+      - "context engineering llm stars:>100 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: strands-agents/evals
+    url: "https://github.com/strands-agents/evals"
+    status: candidate
+    score: 111
+    technique_score: 10
+    stars: 120
+    previous_stars: 118
+    star_delta: 2
+    forks: 33
+    open_issues: 42
+    language: Python
+    license: Apache-2.0
+    pushed_at: "2026-05-08T20:57:23Z"
+    created_at: "2025-07-31T21:53:35Z"
+    trend_velocity_score: 111
+    description: A comprehensive evaluation framework for AI agents and LLM applications.
+    discovery_sources:
+      - static
+    topics:
+      - agentic
+      - agentic-ai
+      - ai
+      - evaluation
+      - machine-learning
+      - python
+      - strands-agents
+    technique_match_reasons:
+      - "required_any=agent,agents,agentic,llm,eval,evaluation,framework"
+      - technique_score=10
+    matched_queries:
+      - "agent eval framework stars:>100 pushed:>=2026-01-01"
+    review_action: human_review_required
+  - name: flora131/atomic
+    url: "https://github.com/flora131/atomic"
+    status: candidate
+    score: 81
+    technique_score: 3
+    stars: 165
+    previous_stars: null
+    star_delta: 0
+    forks: 34
+    open_issues: 15
+    language: TypeScript
+    license: NOASSERTION
+    pushed_at: "2026-05-09T05:40:51Z"
+    created_at: "2025-10-23T04:24:21Z"
+    trend_velocity_score: 81
+    description: "Turn coding agents into reliable, deterministic engineering workflows."
+    discovery_sources:
+      - static
+    topics: []
+    technique_match_reasons:
+      - "required_any=agent,agents,workflow"
+      - technique_score=3
+    matched_queries:
+      - "agentic engineering workflow stars:>50 pushed:>=2026-01-01"
+    review_action: human_review_required

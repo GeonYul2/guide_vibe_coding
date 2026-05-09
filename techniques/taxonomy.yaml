@@ -8,6 +8,7 @@ categories:
     name: Intake, Scope, and Readiness
     description: Clarify intent, lock scope, and decide whether implementation is ready.
     techniques:
+      - standardized_intake_gate
       - deep_interview
       - agent_readiness_scoring
       - scope_control_and_minimal_diff
@@ -87,12 +88,23 @@ categories:
     techniques:
       - source_backed_technique_ingestion
 
+  - id: llm_wiki_and_graph
+    name: LLM Wiki and Knowledge Graph Operations
+    description: Compile source-backed project knowledge into Markdown wiki pages and visualize/verify graph relationships.
+    techniques:
+      - llm_wiki_context_compilation
+      - wiki_first_source_verification
+      - obsidian_graph_knowledge_ops
+      - retrieval_memory_governance
+      - source_backed_technique_ingestion
+
 agent_context_profiles:
   - id: sql_or_data_agent
     name: SQL / Data / Analytics Agent
     description: Agents that read SQL, metrics, dashboards, warehouses, or analytical code.
     recommended_techniques:
       must:
+        - standardized_intake_gate
         - deep_interview
         - structured_output_schema_validation
         - tool_contracts
@@ -119,6 +131,7 @@ agent_context_profiles:
     description: Agents that edit code, tests, configuration, prompts, or repositories.
     recommended_techniques:
       must:
+        - standardized_intake_gate
         - concise_operating_contract
         - scope_control_and_minimal_diff
         - structured_output_schema_validation
@@ -145,10 +158,13 @@ agent_context_profiles:
     description: Agents that turn documents, conversations, or internal knowledge into structured artifacts.
     recommended_techniques:
       must:
+        - standardized_intake_gate
         - deep_interview
         - structured_output_schema_validation
         - prompt_versioning
         - retrieval_memory_governance
+        - llm_wiki_context_compilation
+        - wiki_first_source_verification
         - eval_regression_loop
         - failed_case_memory
         - safety_handoff_boundaries
@@ -170,6 +186,7 @@ agent_context_profiles:
     description: Agents that call tools/APIs, mutate state, create tickets, send messages, or run business processes.
     recommended_techniques:
       must:
+        - standardized_intake_gate
         - deep_interview
         - structured_output_schema_validation
         - tool_contracts
@@ -197,7 +214,10 @@ agent_context_profiles:
     description: Agents that discover sources, track repositories, summarize techniques, or update guidance.
     recommended_techniques:
       must:
+        - standardized_intake_gate
         - source_backed_technique_ingestion
+        - llm_wiki_context_compilation
+        - wiki_first_source_verification
         - structured_output_schema_validation
         - retrieval_memory_governance
         - observability_tracing
@@ -208,6 +228,7 @@ agent_context_profiles:
       should:
         - cost_budgeting
         - token_context_caching
+        - obsidian_graph_knowledge_ops
         - genai_telemetry_standardization
         - model_routing_fallback_policy
         - agent_readiness_scoring
@@ -217,12 +238,14 @@ agent_context_profiles:
         - security_privacy_data_governance
 
 selection_rules:
+  - Start every new automation-agent task with `standardized_intake_gate`; missing fields must trigger `deep_interview` before PRD or implementation.
   - Always consider every technique in `techniques/registry.yaml`, but use this taxonomy to prioritize must/should/optional by context.
   - If an agent can mutate external state, include `permissioned_tool_execution`, `tool_contracts`, `guardrails_tripwires`, and `safety_handoff_boundaries` as must-have techniques.
   - If an agent emits machine-consumed output, include `structured_output_schema_validation` as a must-have technique.
-  - If an agent uses retrieval, memory, long-lived context, or internal knowledge, include `retrieval_memory_governance`, `security_privacy_data_governance`, and `token_context_caching`.
+  - If an agent uses retrieval, memory, long-lived context, or internal knowledge, include `retrieval_memory_governance`, `wiki_first_source_verification`, `security_privacy_data_governance`, and `token_context_caching`.
   - For every business automation agent, include `token_efficiency_budget_gate` as a hard gate because token usage maps directly to cost.
   - If an agent uses long or repeated context, include `token_context_caching`, `cost_budgeting`, `token_efficiency_budget_gate`, and `model_routing_fallback_policy` as must or should.
-  - If an agent produces knowledge, summaries, or classifications, include `eval_regression_loop`, `failed_case_memory`, `structured_output_schema_validation`, and `source_backed_technique_ingestion`.
+  - If an agent produces knowledge, summaries, or classifications, include `llm_wiki_context_compilation`, `wiki_first_source_verification`, `eval_regression_loop`, `failed_case_memory`, `structured_output_schema_validation`, and `source_backed_technique_ingestion`.
   - If an agent edits code, include `scope_control_and_minimal_diff`, `harness_engineering`, `permissioned_tool_execution`, and `deployment_rollout_canary` when production release is expected.
   - If an agent will run beyond a prototype, include `genai_telemetry_standardization` and `deployment_rollout_canary`.
+  - If humans need visual review of technique/workflow/task relationships, include `obsidian_graph_knowledge_ops`.

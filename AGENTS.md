@@ -8,9 +8,9 @@ When an AI coding agent is asked to use this repository for an automation-agent 
 
 1. Read `agent-playbook.yaml`.
 2. Read `techniques/registry.yaml` and `techniques/taxonomy.yaml`.
-3. Treat GitHub repository discovery as the primary technique refresh path. For refresh/discovery work, read `repos/radar-config.yaml` and `workflows/weekly-repo-radar.md`.
+3. For ordinary user tasks, do not run maintainer-only discovery. For refresh/discovery work only, read `maintainer/radar-config.yaml` and `maintainer/workflows/weekly-repo-radar.md`.
 4. If supplemental source material such as YouTube videos, articles, or talks is involved, read `sources/registry.yaml` and `workflows/source-ingestion.md`.
-5. Classify the user's task using `workflows/build-agent.md`.
+5. Fill `intake-form.md` using `workflows/intake.md`, then classify the user's task using `workflows/build-agent.md`.
 6. If the task intent, scope, non-goals, or success criteria are unclear, run `workflows/deep-interview.md` before planning or coding.
 7. Create or update a task folder under `tasks/<task-slug>/` using `templates/`.
 8. Run `python3 scripts/validate_agent_task.py tasks/<task-slug>` before claiming readiness or completion.
@@ -19,6 +19,7 @@ When an AI coding agent is asked to use this repository for an automation-agent 
 
 For every new automation agent, the agent MUST produce these artifacts before implementation:
 
+- `intake-form.md` — normalized first-input contract, missing-field follow-ups, and evidence boundary
 - `agent-prd.md` — purpose, users, scope, non-goals, success criteria
 - `technique-selection.yaml` — selected techniques and rejected techniques with reasons
 - `output-schema.md` — structured output formats, schema versions, parser/repair/fail-closed rules
@@ -43,6 +44,7 @@ Implementation is blocked until the above artifacts exist and contain non-placeh
 
 Unless explicitly rejected with a reason in `technique-selection.yaml`, every automation-agent task must consider:
 
+- standardized intake form / input quality gate
 - deep interview / requirement crystallization
 - harness engineering
 - eval and regression loop
@@ -68,17 +70,25 @@ Unless explicitly rejected with a reason in `technique-selection.yaml`, every au
 
 When the human has not explicitly asked for detailed explanation, long rationale, or expanded documentation, the agent should keep normal user-facing replies to 1-2 sentences. Expand only when needed for safety, blockers, validation evidence, handoff, or requested artifacts.
 
+## Brevity Enforcement Rule
+
+At the first user-facing response in a new task or session, if this brevity policy is active, the agent MUST treat concise chat as enabled by default and state it briefly instead of leaving it implicit. Use wording equivalent to: “Brevity mode is on: I’ll keep chat to 1–3 sentences and put long detail in files/artifacts unless you ask for detail.”
+
+Enforce this as a working constraint: progress updates should be one short sentence; final reports should include only result, validation evidence, changed files, and remaining risks. Put long rationale, plans, and documentation into files/artifacts, not chat, unless the user explicitly asks for detail or a safety/blocker explanation requires expansion.
+
+If verbosity instructions conflict, ask one concise clarification question, then enforce the chosen verbosity for the rest of the task.
+
 ## Primary Technique Discovery Policy
 
-The baseline refresh mechanism is GitHub-first repository discovery. The agent must be able to find hot GitHub repositories that contain reusable agent-engineering techniques, patterns, harnesses, eval systems, structured output/schema systems, caching/context tools, observability/telemetry, MCP/tooling, prompt/workflow discipline, memory/RAG governance, security/privacy, rollout/canary, or safety/permission designs.
+The baseline refresh mechanism for maintainers is GitHub-first repository discovery. Ordinary clone users who are building an automation agent do not need this path. Maintainers must be able to find hot GitHub repositories that contain reusable agent-engineering techniques, patterns, harnesses, eval systems, structured output/schema systems, caching/context tools, observability/telemetry, MCP/tooling, prompt/workflow discipline, memory/RAG governance, security/privacy, rollout/canary, or safety/permission designs.
 
-YouTube videos, blog posts, talks, and release notes are supplemental sources. They may seed techniques, but they do not replace the weekly GitHub repository radar.
+YouTube videos, blog posts, talks, and release notes are supplemental sources. They may seed techniques, but they do not replace maintainer-reviewed GitHub repository discovery.
 
 For discovery work:
 
-1. Use `scripts/weekly_repo_radar.py` and `repos/radar-config.yaml`.
+1. Use `maintainer/scripts/weekly_repo_radar.py` and `maintainer/radar-config.yaml`.
 2. Prioritize reusable technique repositories over domain-specific demo apps.
-3. Record candidates under `repos/radar/`.
+3. Record candidates under `maintainer/radar/`.
 4. Promote reviewed repositories into `repos/registry.yaml` only after human review.
 5. Promote a new mandatory technique only after a repository/source shows a reusable pattern and an enforcement point exists in this repo.
 
@@ -98,7 +108,7 @@ Do not vendor, copy, or mirror entire external GitHub repositories into this rep
 
 External repositories must be tracked only as metadata in `repos/registry.yaml` plus optional concise summaries under `repos/summaries/`.
 
-Weekly discovery is automated by `.github/workflows/weekly-repo-radar.yml`. The scheduled job may create review artifacts and a PR, but it must not directly adopt candidates into `repos/registry.yaml` without human review.
+Technique discovery is manual-dispatch only via `.github/workflows/weekly-repo-radar.yml` or `maintainer/scripts/weekly_repo_radar.py`. It may create review artifacts and a PR under `maintainer/radar/`, but it must not directly adopt candidates into `repos/registry.yaml` without human review.
 
 Each external repo entry should include:
 

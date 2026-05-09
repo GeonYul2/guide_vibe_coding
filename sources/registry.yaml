@@ -55,3 +55,26 @@ sources:
     notes: >
       Use as source material for concise project instruction files, minimal but strict
       agent operating contracts, scope control, and verification-first behavior.
+
+
+  - id: article-roboco-karpathy-llm-wiki-72-run-benchmark
+    type: article
+    url: https://roboco.io/posts/karpathy-llm-wiki-72-run-benchmark/
+    title: "Karpathy LLM Wiki, 진짜 효과가 있을까 - 72-run 벤치마크와 셋팅 가이드"
+    status: supplemental_seed_summarized
+    tags:
+      - llm-wiki
+      - obsidian
+      - context-engineering
+      - source-verification
+      - benchmark
+      - knowledge-graph
+    extract_into:
+      - techniques/registry.yaml
+      - workflows/intake.md
+      - wiki/index.md
+      - wiki/llm-wiki-operations.md
+    notes: >
+      Use as source material for LLM Wiki context compilation, Obsidian graph visualization,
+      wiki-first/source-verification policy, ingest-query-lint operations, and benchmark-gated
+      context strategy. Do not copy the article; extract reusable patterns and cite the URL.

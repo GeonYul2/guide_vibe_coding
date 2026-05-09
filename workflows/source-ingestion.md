@@ -2,7 +2,7 @@
 
 Use this workflow when a YouTube video, article, talk, release note, internal post, or other non-GitHub source should inform this executable guide.
 
-This is **supplemental**. The baseline discovery mechanism remains `workflows/weekly-repo-radar.md`, which searches GitHub repositories for reusable agent-engineering technique repos.
+This is **supplemental** and maintainer-only. The baseline discovery mechanism for maintainers remains `maintainer/workflows/weekly-repo-radar.md`, which searches GitHub repositories for reusable agent-engineering technique repos.
 
 ## Policy
 

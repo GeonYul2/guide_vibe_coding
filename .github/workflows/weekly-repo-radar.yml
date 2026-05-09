@@ -1,9 +1,6 @@
 name: weekly-technique-repo-radar
 
 on:
-  schedule:
-    # GitHub Actions schedules use UTC. This is Monday 09:00 KST.
-    - cron: '0 0 * * 1'
   workflow_dispatch:
     inputs:
       limit:
@@ -34,12 +31,12 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           LIMIT="${{ github.event.inputs.limit || '10' }}"
-          python3 scripts/weekly_repo_radar.py --date "$(date -u +%F)" --limit "$LIMIT"
+          python3 maintainer/scripts/weekly_repo_radar.py --date "$(date -u +%F)" --limit "$LIMIT"
 
       - name: Detect radar changes
         id: changes
         run: |
-          if git diff --quiet -- repos/radar; then
+          if git diff --quiet -- maintainer/radar; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -55,18 +52,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$BRANCH"
-          git add repos/radar
+          git add maintainer/radar
           git commit -m "Track weekly agent engineering technique repository radar
 
 Constraint: External repositories are metadata-only; no vendoring.
 Confidence: medium
 Scope-risk: narrow
 Directive: Review GitHub technique repo candidates before promoting anything into repos/registry.yaml or techniques/registry.yaml.
-Tested: python3 scripts/weekly_repo_radar.py generated radar artifacts in CI.
+Tested: python3 maintainer/scripts/weekly_repo_radar.py generated radar artifacts in CI.
 Not-tested: Human qualitative review of candidate repositories."
           git push --set-upstream origin "$BRANCH"
           gh pr create \
             --title "Weekly agent technique repo radar ${RUN_DATE}" \
-            --body "Generated GitHub-first technique repository radar artifacts under repos/radar/. Review candidates manually before adopting any repository or technique." \
+            --body "Generated maintainer-only GitHub-first technique repository radar artifacts under maintainer/radar/. Review candidates manually before adopting any repository or technique." \
             --base "${{ github.event.repository.default_branch }}" \
             --head "$BRANCH"

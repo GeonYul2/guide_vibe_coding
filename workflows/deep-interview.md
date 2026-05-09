@@ -1,12 +1,12 @@
 # Workflow: Deep Interview
 
-Purpose: turn a vague automation-agent idea into an implementation-ready specification.
+Purpose: turn a vague or incomplete `intake-form.md` into an implementation-ready specification.
 
 ## Rules
 
 - Ask one question per round.
 - Ask about intent and boundaries before implementation details.
-- Do not start implementation until non-goals and success criteria are explicit.
+- Do not start PRD synthesis or implementation until missing intake fields, non-goals, and success criteria are explicit.
 - Prefer concrete examples, counterexamples, and tradeoff questions.
 - If codebase facts can be discovered directly, inspect them instead of asking the user.
 
@@ -23,7 +23,7 @@ Purpose: turn a vague automation-agent idea into an implementation-ready specifi
 
 ## Crystallized Output
 
-Write the result into `agent-prd.md`:
+Write the result back into `intake-form.md` first, then synthesize `agent-prd.md`:
 
 - Problem
 - Users

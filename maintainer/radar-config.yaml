@@ -1,14 +1,41 @@
 version: 0.4.0
 purpose: >
-  Weekly GitHub-first discovery of hot agent-engineering technique repositories.
+  Manual GitHub-first discovery of hot agent-engineering technique repositories for maintainers.
   Video/article sources are supplemental and are handled by workflows/source-ingestion.md.
-cadence: weekly
-schedule:
-  day: monday
-  utc_cron: "0 0 * * 1"
-  kst_time: "Monday 09:00"
+suggested_cadence: weekly_when_maintainer_requests
+automatic_triggers: disabled
+manual_trigger: workflow_dispatch_or_local_script
 search:
   per_query_limit: 10
+  dynamic_search:
+    enabled: true
+    max_dynamic_queries: 80
+    min_star_delta_for_rising: 10
+    strategy: >
+      Combine curated static searches with generated freshness/growth searches across
+      topic x created/pushed windows. This approximates a rising-repository radar
+      from GitHub API signals without relying on third-party trending sites.
+  dynamic_topics:
+    - "ai agent"
+    - "agent harness"
+    - "agent eval"
+    - "llm eval"
+    - "structured outputs llm"
+    - "llm observability"
+    - "agent telemetry"
+    - "context engineering"
+    - "prompt caching"
+    - "token optimization"
+    - "mcp server"
+    - "mcp tools"
+    - "agent memory"
+    - "rag agent"
+    - "model routing llm"
+    - "llm guardrails"
+    - "claude code"
+    - "codex cli"
+    - "agent workflow"
+    - "agentic engineering"
   queries:
     - "agent harness stars:>50 pushed:>={year_start}"
     - "agent eval framework stars:>100 pushed:>={year_start}"
@@ -94,16 +121,19 @@ scoring:
   factors:
     - stars
     - star_delta_from_previous_radar
+    - stars_per_repo_age_day
+    - recent_creation
     - recent_push
     - technique_keyword_score
     - matched_query_count
+    - dynamic_query_hit_count
     - fork_count
 review_policy:
   auto_vendor_repos: false
   auto_modify_main_registry: false
   output_only:
-    - repos/radar/YYYY-MM-DD.md
-    - repos/radar/YYYY-MM-DD-candidates.yaml
+    - maintainer/radar/YYYY-MM-DD.md
+    - maintainer/radar/YYYY-MM-DD-candidates.yaml
   human_review_required_for:
     - moving candidate into repos/registry.yaml
     - marking a source as adopted

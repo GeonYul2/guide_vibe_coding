@@ -1,0 +1,45 @@
+version: 0.1.0
+name: agent-helper-user-distribution
+purpose: >
+  Export only the user-facing automation-agent helper from the maintainer/source
+  repository. Maintainer radar, GitHub discovery automation, generated wiki,
+  local runtime state, and sample tasks are intentionally excluded.
+
+# Paths copied as-is from this source repository into the target repository.
+include:
+  - workflows/build-agent.md
+  - workflows/deep-interview.md
+  - workflows/intake.md
+  - templates/
+  - techniques/
+  - scripts/new_agent_task.py
+  - scripts/validate_agent_task.py
+  - sources/registry.yaml
+  - sources/summaries/
+  - repos/README.md
+  - repos/registry.yaml
+  - tasks/.gitkeep
+
+# Source => destination overrides for files that must differ in the user-facing repo.
+overrides:
+  - distribution/user/AGENTS.md => AGENTS.md
+  - distribution/user/README.md => README.md
+  - distribution/user/SECURITY.md => SECURITY.md
+  - distribution/user/agent-playbook.yaml => agent-playbook.yaml
+
+# These paths must never be copied by the exporter. With --prune-excluded, exactly
+# these target paths are removed to clean up old full-repo exports.
+exclude:
+  - maintainer/
+  - .github/workflows/weekly-repo-radar.yml
+  - .github/workflows/validate.yml
+  - .github/workflows/publish-user-distribution.yml
+  - wiki/
+  - .obsidian/
+  - .omx/
+  - reports/
+  - scripts/test_agent_guide.py
+  - scripts/generate_llm_wiki.py
+  - scripts/generate_repo_score_report.py
+  - tasks/customer-email-reply-agent/
+  - repos/radar/
