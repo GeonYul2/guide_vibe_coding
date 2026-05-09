@@ -441,6 +441,7 @@ def test_user_distribution_export_contracts() -> None:
         assert_true(result.returncode == 0, f"user distribution export failed: {result.stdout}\n{result.stderr}")
 
         assert_true((target / "AGENTS.md").exists(), "export missing user AGENTS.md")
+        assert_true((target / ".gitignore").exists(), "export missing user .gitignore")
         assert_true((target / "README.md").exists(), "export missing user README.md")
         assert_true((target / "SECURITY.md").exists(), "export missing user SECURITY.md")
         assert_true((target / "agent-playbook.yaml").exists(), "export missing user playbook")
