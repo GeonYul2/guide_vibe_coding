@@ -56,14 +56,14 @@ jobs:
 
       - name: Export user-facing subset
         run: |
-          PRUNE_ARGS=""
+          PRUNE_ARGS=()
           if [ "${{ inputs.prune_excluded }}" = "true" ]; then
-            PRUNE_ARGS="$PRUNE_ARGS --prune-excluded"
+            PRUNE_ARGS+=(--prune-excluded)
           fi
           if [ "${{ inputs.prune_stale }}" = "true" ]; then
-            PRUNE_ARGS="$PRUNE_ARGS --prune-stale"
+            PRUNE_ARGS+=(--prune-stale)
           fi
-          python3 source/maintainer/scripts/export_user_distribution.py --dest target $PRUNE_ARGS
+          python3 source/maintainer/scripts/export_user_distribution.py --dest target "${PRUNE_ARGS[@]}"
 
       - name: Show target diff
         run: |
@@ -97,15 +97,18 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$BRANCH"
           git add -A
-          git commit -m "Publish user-facing agent guide subset
+          cat > /tmp/user-distribution-commit-message <<'EOF'
+          Publish user-facing agent guide subset
 
-Constraint: Target repository receives only manifest-selected runtime files.
-Rejected: Copy maintainer radar/update automation | User distributions must not carry upstream discovery logic.
-Confidence: medium
-Scope-risk: narrow
-Directive: Update distribution/user-export-manifest.yaml before changing what is published.
-Tested: maintainer/scripts/export_user_distribution.py completed in CI.
-Not-tested: Target repository runtime behavior beyond exported file diff."
+          Constraint: Target repository receives only manifest-selected runtime files.
+          Rejected: Copy maintainer radar/update automation | User distributions must not carry upstream discovery logic.
+          Confidence: medium
+          Scope-risk: narrow
+          Directive: Update distribution/user-export-manifest.yaml before changing what is published.
+          Tested: maintainer/scripts/export_user_distribution.py completed in CI.
+          Not-tested: Target repository runtime behavior beyond exported file diff.
+          EOF
+          git commit -F /tmp/user-distribution-commit-message
           git push --set-upstream origin "$BRANCH"
           gh pr create \
             --repo "$TARGET_REPOSITORY" \

@@ -509,6 +509,7 @@ def test_security_posture_contracts() -> None:
     assert_true("USER_DISTRIBUTION_TOKEN" in publish_workflow, "publish workflow must require an explicit target-repo token")
     assert_true("export_user_distribution.py" in publish_workflow, "publish workflow must use manifest-bounded exporter")
     assert_true("--prune-stale" in publish_workflow, "publish workflow must support stale export pruning")
+    assert_true("git commit -F" in publish_workflow, "publish workflow must use commit-message files, not unindented multiline -m strings")
 
     security = read("SECURITY.md")
     assert_true("Markdown/YAML files" in security, "SECURITY.md missing clone safety statement")
@@ -539,6 +540,11 @@ def test_workflow_and_docs_contracts() -> None:
     assert_true("schedule:" not in workflow and "cron:" not in workflow, "weekly radar must not run automatically")
     assert_true("contents: write" in workflow and "pull-requests: write" in workflow, "workflow missing PR permissions")
     assert_true("maintainer/scripts/weekly_repo_radar.py" in workflow, "workflow does not run maintainer radar script")
+    assert_true("git commit -F" in workflow, "weekly workflow must use commit-message files, not unindented multiline -m strings")
+    for workflow_file in sorted((ROOT / ".github" / "workflows").glob("*.yml")):
+        text = workflow_file.read_text(encoding="utf-8")
+        top_level_lore_trailers = re.findall(r"^(Constraint|Rejected|Confidence|Scope-risk|Directive|Tested|Not-tested):", text, flags=re.MULTILINE)
+        assert_true(not top_level_lore_trailers, f"workflow has invalid top-level commit trailer keys: {workflow_file.name}")
 
     validate_workflow = read(".github/workflows/validate.yml")
     assert_true("workflow_dispatch:" in validate_workflow, "validate workflow must remain manual-dispatchable")
