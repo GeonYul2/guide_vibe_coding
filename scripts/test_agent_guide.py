@@ -561,7 +561,11 @@ def test_workflow_and_docs_contracts() -> None:
         "GitHub-first repository discovery" in agents or "GitHub repository discovery as the primary" in agents,
         "AGENTS missing GitHub-first policy",
     )
-    assert_true("1-2 sentences" in agents, "AGENTS missing response brevity policy")
+    assert_true("one sentence by default" in agents, "AGENTS missing response brevity policy")
+    assert_true(
+        "first user-facing response" in agents and "exactly one sentence" in agents,
+        "AGENTS missing first-response brevity enforcement",
+    )
     assert_true("readiness-scorecard.md" in agents, "AGENTS missing readiness scorecard gate")
     assert_true("output-schema.md" in agents, "AGENTS missing structured output schema gate")
     assert_true("guardrails.md" in agents, "AGENTS missing guardrails gate")

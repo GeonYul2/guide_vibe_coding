@@ -64,7 +64,7 @@ AGENTS.md or task-local instruction file
 
 ## Operating Notes
 
-Unless the human explicitly asks for detail, keep normal user-facing replies to 1-2 sentences. Expand only for safety, blockers, validation evidence, handoff, or requested artifacts.
+Unless the human explicitly asks for detail, keep normal user-facing replies to one sentence by default. The first user-facing response in a new task or session must be exactly one sentence that declares brevity mode. Use two sentences only for safety, blockers, validation evidence, handoff, or requested artifacts.
 
 ## Source References
 

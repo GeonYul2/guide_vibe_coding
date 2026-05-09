@@ -35,4 +35,4 @@ Use `wiki/` as the first-pass map for token-efficient technique routing. It is n
 
 ## Response Brevity
 
-Brevity is the default: keep routine progress and final chat concise, and place long rationale or plans in task artifacts unless the user asks for detail or a safety/blocker explanation requires expansion.
+Brevity is the default: the first user-facing response in a new task or session must be exactly one sentence declaring brevity mode, and routine progress/final chat should stay one sentence by default. Place long rationale or plans in task artifacts unless the user asks for detail or a safety/blocker explanation requires expansion.

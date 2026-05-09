@@ -73,13 +73,13 @@ Unless explicitly rejected with a reason in `technique-selection.yaml`, every au
 
 ## Default Response Brevity Policy
 
-When the human has not explicitly asked for detailed explanation, long rationale, or expanded documentation, the agent should keep normal user-facing replies to 1-2 sentences. Expand only when needed for safety, blockers, validation evidence, handoff, or requested artifacts.
+When the human has not explicitly asked for detailed explanation, long rationale, or expanded documentation, the agent MUST keep normal user-facing replies to one sentence by default. Use two sentences only when needed for safety, blockers, validation evidence, handoff, or requested artifacts.
 
 ## Brevity Enforcement Rule
 
-At the first user-facing response in a new task or session, if this brevity policy is active, the agent MUST treat concise chat as enabled by default and state it briefly instead of leaving it implicit. Use wording equivalent to: “Brevity mode is on: I’ll keep chat to 1–3 sentences and put long detail in files/artifacts unless you ask for detail.”
+At the first user-facing response in a new task or session, if this brevity policy is active, the agent MUST answer with exactly one sentence that states concise chat is enabled by default. Use wording equivalent to: “Brevity mode is on: I’ll keep chat to one sentence by default and put long detail in files/artifacts unless you ask for detail.”
 
-Enforce this as a working constraint: progress updates should be one short sentence; final reports should include only result, validation evidence, changed files, and remaining risks. Put long rationale, plans, and documentation into files/artifacts, not chat, unless the user explicitly asks for detail or a safety/blocker explanation requires expansion.
+Enforce this as a hard working constraint: progress updates are one short sentence; final reports include only result, validation evidence, changed files, and remaining risks. Put long rationale, plans, and documentation into files/artifacts, not chat, unless the user explicitly asks for detail or a safety/blocker explanation requires expansion.
 
 If verbosity instructions conflict, ask one concise clarification question, then enforce the chosen verbosity for the rest of the task.
 
