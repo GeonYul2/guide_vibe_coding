@@ -13,10 +13,11 @@ Purpose: publish only the user-facing automation-agent helper subset from this s
 ```bash
 python3 maintainer/scripts/export_user_distribution.py \
   --dest /path/to/user-distribution-checkout \
-  --prune-excluded
+  --prune-excluded \
+  --prune-stale
 ```
 
-Use `--dry-run` first when the target checkout is not dedicated to this distribution.
+Use `--dry-run` first when the target checkout is not dedicated to this distribution. `--prune-stale` only removes paths recorded in the previous export stamp as copied by this exporter; unknown target files are preserved.
 
 ## GitHub PR Publish
 
@@ -32,6 +33,7 @@ Manual inputs:
 - `target_branch`: base branch, usually `main`
 - `dry_run`: default `true`; set `false` only when the diff is expected
 - `prune_excluded`: default `true`; removes legacy excluded paths from a dedicated distribution repo
+- `prune_stale`: default `true`; removes previously exported paths no longer managed by the manifest
 
 ## Review Rules
 

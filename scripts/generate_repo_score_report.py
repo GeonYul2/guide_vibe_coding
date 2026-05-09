@@ -5,7 +5,7 @@ The report applies the repository's `agent_readiness_scoring` technique at the
 repository level: it reuses task readiness scorecards, required artifact gates,
 registry/taxonomy consistency checks, and local validation evidence.
 
-Only Python stdlib is used so the report can run in clone/user distributions.
+Only Python stdlib is used so the report can run in source/maintainer clones.
 """
 from __future__ import annotations
 
@@ -23,6 +23,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_HTML = ROOT / "reports" / "repo-readiness-report.html"
 DEFAULT_JSON = ROOT / "reports" / "repo-readiness-report.json"
+TEST_TASK_PREFIX = "qa-complete-agent-"
 
 
 @dataclasses.dataclass
@@ -167,7 +168,7 @@ def discover_task_dirs() -> list[Path]:
     for parent in [ROOT / "tasks", ROOT / "maintainer" / "tasks"]:
         if parent.exists():
             dirs.extend(sorted(path.parent for path in parent.glob("*/readiness-scorecard.md")))
-    return dirs
+    return [path for path in dirs if not (path.parent == ROOT / "tasks" and path.name.startswith(TEST_TASK_PREFIX))]
 
 
 def build_report(run_tests: bool) -> dict[str, object]:

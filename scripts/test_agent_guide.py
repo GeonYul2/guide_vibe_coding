@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -17,6 +18,7 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+TEST_TASK_PREFIX = "qa-complete-agent-"
 
 
 def assert_true(condition: bool, message: str) -> None:
@@ -76,9 +78,9 @@ def load_export_module():
     return module
 
 
-def filled_task_text(template_name: str) -> str:
+def filled_task_text(template_name: str, task_slug: str = "qa-complete-agent") -> str:
     if template_name == "readiness-scorecard.md":
-        return """# Agent Readiness Scorecard: qa-complete-agent
+        return f"""# Agent Readiness Scorecard: {task_slug}
 
 Purpose: show whether this agent task is ready for implementation and what is missing.
 
@@ -135,7 +137,7 @@ Human Review       [green]
   - Keep score arithmetic valid.
 """
     text = read(f"templates/{template_name}")
-    text = text.replace("<task-slug>", "qa-complete-agent")
+    text = text.replace("<task-slug>", task_slug)
     text = text.replace("<name>", "qa-tool")
     text = text.replace("<short name>", "qa-failure")
     text = text.replace("TODO", "Concrete QA-filled content")
@@ -248,11 +250,12 @@ def test_taxonomy_references_are_valid() -> None:
 
 
 def test_scaffold_and_validator_behavior() -> None:
-    task_dir = ROOT / "tasks" / "qa-complete-agent"
+    task_slug = f"{TEST_TASK_PREFIX}{os.getpid()}"
+    task_dir = ROOT / "tasks" / task_slug
     if task_dir.exists():
         shutil.rmtree(task_dir)
     try:
-        result = run([sys.executable, "scripts/new_agent_task.py", "QA Complete Agent"])
+        result = run([sys.executable, "scripts/new_agent_task.py", f"QA Complete Agent {os.getpid()}"])
         assert_true(result.returncode == 0, f"scaffolder failed: {result.stderr}\n{result.stdout}")
         assert_true(task_dir.exists(), "scaffolder did not create normalized task dir")
         assert_true((task_dir / "intake-form.md").exists(), "scaffolder did not create required intake form")
@@ -263,7 +266,7 @@ def test_scaffold_and_validator_behavior() -> None:
 
         required_artifacts = re.findall(r"path:\s*([a-zA-Z0-9_.-]+)", read("agent-playbook.yaml"))
         for artifact in required_artifacts:
-            (task_dir / artifact).write_text(filled_task_text(artifact), encoding="utf-8")
+            (task_dir / artifact).write_text(filled_task_text(artifact, task_slug), encoding="utf-8")
 
         pass_result = run([sys.executable, "scripts/validate_agent_task.py", str(task_dir)])
         assert_true(pass_result.returncode == 0, f"validator should pass filled task: {pass_result.stdout}\n{pass_result.stderr}")
@@ -309,6 +312,8 @@ def test_existing_task_readiness_scorecards_are_verifiable() -> None:
     )
     for scorecard in scorecards:
         task_dir = scorecard.parent
+        if task_dir.parent == ROOT / "tasks" and task_dir.name.startswith(TEST_TASK_PREFIX):
+            continue
         result = run([sys.executable, "scripts/validate_agent_task.py", str(task_dir)])
         assert_true(result.returncode == 0, f"task validator failed for {task_dir.relative_to(ROOT)}: {result.stdout}\n{result.stderr}")
 
@@ -402,6 +407,7 @@ def test_user_distribution_export_contracts() -> None:
     assert_true("publish-user-distribution.yml" in manifest_text, "user distribution manifest must exclude publish workflow")
     assert_true("generate_repo_score_report.py" in manifest_text, "user distribution manifest must exclude source-repo score reporter")
     assert_true("distribution/user/AGENTS.md => AGENTS.md" in manifest_text, "user distribution must override AGENTS.md")
+    assert_true("--prune-stale" in read("maintainer/workflows/publish-user-distribution.md"), "publish workflow docs must document stale export pruning")
 
     source_playbook = read("agent-playbook.yaml")
     user_playbook = read("distribution/user/agent-playbook.yaml")
@@ -462,6 +468,28 @@ def test_user_distribution_export_contracts() -> None:
         assert_true(not (target / "tasks" / "customer-email-reply-agent").exists(), "user distribution must not include sample task")
         assert_true((target / ".agent-guide-distribution.json").exists(), "export missing distribution stamp")
 
+        stale_managed_path = target / "legacy-copied.md"
+        stale_managed_path.write_text("old managed export", encoding="utf-8")
+        unknown_local_path = target / "local-user-note.md"
+        unknown_local_path.write_text("preserve user-owned file", encoding="utf-8")
+        stamp_path = target / ".agent-guide-distribution.json"
+        stamp = json.loads(stamp_path.read_text(encoding="utf-8"))
+        stamp["copied_paths"] = list(stamp["copied_paths"]) + ["legacy-copied.md"]
+        stamp_path.write_text(json.dumps(stamp, indent=2), encoding="utf-8")
+
+        stale_result = run(
+            [
+                sys.executable,
+                "maintainer/scripts/export_user_distribution.py",
+                "--dest",
+                str(target),
+                "--prune-stale",
+            ]
+        )
+        assert_true(stale_result.returncode == 0, f"user distribution stale prune failed: {stale_result.stdout}\n{stale_result.stderr}")
+        assert_true(not stale_managed_path.exists(), "stale previously-copied export path must be pruned")
+        assert_true(unknown_local_path.exists(), "stale prune must preserve unknown target files")
+
         exported_agents = (target / "AGENTS.md").read_text(encoding="utf-8")
         assert_true("maintainer-only technique discovery" in exported_agents, "user AGENTS missing discovery boundary")
         assert_true("source/maintainer repository" in exported_agents, "user AGENTS missing source-repo handoff")
@@ -480,6 +508,7 @@ def test_security_posture_contracts() -> None:
     assert_true("permissions:" in publish_workflow and "contents: read" in publish_workflow, "publish workflow must have read-only source permissions")
     assert_true("USER_DISTRIBUTION_TOKEN" in publish_workflow, "publish workflow must require an explicit target-repo token")
     assert_true("export_user_distribution.py" in publish_workflow, "publish workflow must use manifest-bounded exporter")
+    assert_true("--prune-stale" in publish_workflow, "publish workflow must support stale export pruning")
 
     security = read("SECURITY.md")
     assert_true("Markdown/YAML files" in security, "SECURITY.md missing clone safety statement")
@@ -548,6 +577,7 @@ def test_workflow_and_docs_contracts() -> None:
 
     maintainer_readme = read("maintainer/README.md")
     assert_true("export_user_distribution.py" in maintainer_readme, "maintainer README missing export script")
+    assert_true("--prune-stale" in maintainer_readme, "maintainer README missing stale export pruning guidance")
     assert_true("USER_DISTRIBUTION_TOKEN" in maintainer_readme, "maintainer README missing publish secret boundary")
 
 

@@ -75,7 +75,7 @@ This report is maintainer-facing and is intentionally excluded from the user dis
 Use two separate pushes:
 
 1. Source/maintainer repo — commit and push source-of-truth changes here first.
-2. User distribution repo — run `maintainer/scripts/export_user_distribution.py --prune-excluded` into the separate user checkout, review the diff, then push that repo separately.
+2. User distribution repo — run `maintainer/scripts/export_user_distribution.py --prune-excluded --prune-stale` into the separate user checkout, review the diff, then push that repo separately.
 
 Do not push generated maintainer-only reports, radar outputs, wiki, `.omx`, `.obsidian`, or sample tasks to the user distribution repo.
 

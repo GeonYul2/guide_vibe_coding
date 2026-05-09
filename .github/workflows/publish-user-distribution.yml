@@ -24,6 +24,11 @@ on:
         required: false
         type: boolean
         default: true
+      prune_stale:
+        description: 'Remove previously exported paths no longer managed by the current manifest'
+        required: false
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -51,11 +56,14 @@ jobs:
 
       - name: Export user-facing subset
         run: |
-          PRUNE_ARG=""
+          PRUNE_ARGS=""
           if [ "${{ inputs.prune_excluded }}" = "true" ]; then
-            PRUNE_ARG="--prune-excluded"
+            PRUNE_ARGS="$PRUNE_ARGS --prune-excluded"
           fi
-          python3 source/maintainer/scripts/export_user_distribution.py --dest target $PRUNE_ARG
+          if [ "${{ inputs.prune_stale }}" = "true" ]; then
+            PRUNE_ARGS="$PRUNE_ARGS --prune-stale"
+          fi
+          python3 source/maintainer/scripts/export_user_distribution.py --dest target $PRUNE_ARGS
 
       - name: Show target diff
         run: |

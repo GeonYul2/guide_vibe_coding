@@ -39,7 +39,8 @@ python3 scripts/validate_agent_task.py tasks/internal-doc-report-agent
 ```bash
 python3 maintainer/scripts/export_user_distribution.py \
   --dest /path/to/user-distribution-checkout \
-  --prune-excluded
+  --prune-excluded \
+  --prune-stale
 ```
 
 - 배포 기준: `distribution/user-export-manifest.yaml`

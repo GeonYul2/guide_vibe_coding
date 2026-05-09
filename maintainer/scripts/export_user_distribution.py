@@ -156,10 +156,34 @@ def write_stamp(dest: Path, manifest_path: Path, operations: list[CopyOperation]
     stamp_path.write_text(json.dumps(stamp, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
-def export_distribution(dest: Path, manifest_path: Path, *, dry_run: bool, prune_excluded: bool) -> None:
+def read_previous_copied_paths(dest: Path) -> set[str]:
+    """Return paths managed by the previous export stamp, if one exists."""
+    stamp_path = dest / STAMP_FILE
+    if not stamp_path.exists():
+        return set()
+    try:
+        stamp = json.loads(stamp_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return set()
+    copied = stamp.get("copied_paths", [])
+    if not isinstance(copied, list):
+        return set()
+    paths: set[str] = set()
+    for item in copied:
+        if isinstance(item, str):
+            paths.add(clean_token(item).rstrip("/"))
+    return paths
+
+
+def path_is_currently_managed(path: str, current_dests: set[str]) -> bool:
+    return path in current_dests or any(path.startswith(f"{dest}/") for dest in current_dests)
+
+
+def export_distribution(dest: Path, manifest_path: Path, *, dry_run: bool, prune_excluded: bool, prune_stale: bool) -> None:
     manifest = parse_manifest(manifest_path)
     operations, excluded = manifest_operations(manifest)
     ensure_outside_source(dest, ROOT)
+    current_dests = {op.dest for op in operations}
 
     if not dry_run:
         dest.mkdir(parents=True, exist_ok=True)
@@ -167,6 +191,11 @@ def export_distribution(dest: Path, manifest_path: Path, *, dry_run: bool, prune
     if prune_excluded:
         for item in excluded:
             remove_path(path_for(dest, item), dry_run=dry_run)
+
+    if prune_stale:
+        for item in sorted(read_previous_copied_paths(dest)):
+            if not path_is_currently_managed(item, current_dests):
+                remove_path(path_for(dest, item), dry_run=dry_run)
 
     copied_dests: set[str] = set()
     for op in operations:
@@ -178,9 +207,11 @@ def export_distribution(dest: Path, manifest_path: Path, *, dry_run: bool, prune
         copied_dests.add(op.dest)
 
     write_stamp(dest, manifest_path, operations, excluded, dry_run=dry_run)
+    prune_modes = [name for enabled, name in [(prune_excluded, "excluded"), (prune_stale, "stale")] if enabled]
+    prune_label = f"with {'+'.join(prune_modes)} prune" if prune_modes else "without prune"
     print(
         f"Export {'planned' if dry_run else 'complete'}: {len(copied_dests)} paths "
-        f"to {dest} ({'with' if prune_excluded else 'without'} prune)"
+        f"to {dest} ({prune_label})"
     )
 
 
@@ -194,6 +225,14 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Remove manifest excluded paths from the target before copying. Use for dedicated distribution repos.",
     )
+    parser.add_argument(
+        "--prune-stale",
+        action="store_true",
+        help=(
+            "Remove paths copied by a previous stamped export when they are no longer managed by "
+            "the current manifest. Unknown target files are preserved."
+        ),
+    )
     return parser
 
 
@@ -201,7 +240,13 @@ def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     try:
-        export_distribution(args.dest, args.manifest, dry_run=args.dry_run, prune_excluded=args.prune_excluded)
+        export_distribution(
+            args.dest,
+            args.manifest,
+            dry_run=args.dry_run,
+            prune_excluded=args.prune_excluded,
+            prune_stale=args.prune_stale,
+        )
     except Exception as exc:  # noqa: BLE001 - command-line tool should print concise failures.
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
