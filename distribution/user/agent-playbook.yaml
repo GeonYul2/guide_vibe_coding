@@ -1,17 +1,34 @@
-version: 0.3.0-user
+version: 0.3.1-user
 purpose: >
   Machine-readable execution contract for agents building automation agents with
   the user-facing distribution of this guide. Maintainer-only GitHub radar,
-  technique discovery automation, generated wiki, and publishing workflows are
-  intentionally excluded.
+  technique discovery automation, full maintainer generated wiki, and publishing
+  workflows are intentionally excluded. A curated user wiki is included for
+  token-efficient orientation and technique routing.
 default_workflow: workflows/build-agent.md
 required_boot_files:
   - AGENTS.md
+  - wiki/index.md
   - agent-playbook.yaml
-  - techniques/registry.yaml
   - techniques/taxonomy.yaml
+  - techniques/registry.yaml
   - workflows/intake.md
   - workflows/build-agent.md
+token_efficient_boot:
+  orientation_file: wiki/index.md
+  technique_map: wiki/technique-map.md
+  rule: >
+    Use the wiki to narrow the reading path and likely technique bundle before
+    loading larger canonical files. Verify final gates and every selected or
+    rejected technique against techniques/taxonomy.yaml and
+    techniques/registry.yaml.
+intake_mode:
+  style: conversational_question_answer
+  max_questions_per_round: 1
+  artifact: tasks/<task-slug>/intake-form.md
+  rule: >
+    Ask one missing-field question at a time, write each answer into the intake
+    artifact, and do not request the full intake form in a single chat turn.
 required_artifacts:
   - path: intake-form.md
     template: templates/intake-form.md
@@ -103,8 +120,11 @@ distribution_boundary:
     - maintainer GitHub radar
     - repository discovery automation
     - publish workflows
-    - generated wiki and Obsidian state
+    - full maintainer generated wiki
+    - Obsidian state
   refresh_source: source/maintainer repository only
+  included:
+    - curated user wiki for token-efficient technique selection
 external_repo_policy:
   vendoring: forbidden
   allowed_storage:

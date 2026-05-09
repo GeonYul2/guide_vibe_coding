@@ -4,9 +4,10 @@ Purpose: publish only the user-facing automation-agent helper subset from this s
 
 ## Boundary
 
-- Source repo keeps maintainer-only technique radar, discovery scripts, generated wiki, and publish automation.
+- Source repo keeps maintainer-only technique radar, discovery scripts, the full generated maintainer wiki, and publish automation.
 - User distribution repo receives only paths declared in `distribution/user-export-manifest.yaml`.
-- The user distribution does not receive `.github/workflows/weekly-repo-radar.yml`, `maintainer/`, `.omx/`, `.obsidian/`, generated `wiki/`, or sample tasks.
+- The user distribution does not receive `.github/workflows/weekly-repo-radar.yml`, `maintainer/`, `.omx/`, `.obsidian/`, the full generated maintainer `wiki/`, or sample tasks.
+- The user distribution does receive the curated user wiki from `distribution/user/wiki/` as `wiki/` so cloned user repos can route intake and technique selection with less context.
 
 ## Local Export
 
@@ -38,6 +39,6 @@ Manual inputs:
 ## Review Rules
 
 1. Review the workflow dry-run diff first.
-2. Confirm no maintainer/update logic is present in the target diff.
+2. Confirm no maintainer/update logic is present in the target diff, and that `wiki/` contains only the curated user wiki.
 3. Open a PR into the user distribution repository.
 4. Do not give the user distribution repository radar credentials, PATs, or discovery workflows.

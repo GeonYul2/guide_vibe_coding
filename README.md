@@ -6,19 +6,20 @@
 
 팀원이 새 자동화 에이전트를 만들 때 이 레포를 컨텍스트로 불러오면, 에이전트는 다음을 반드시 수행해야 합니다.
 
-1. 표준 `intake-form.md`로 첫 입력 품질을 맞추고, 부족한 부분은 Deep Interview로 목적/범위/비목표/성공기준을 정리한다.
-2. 적용할 Agent Engineering technique을 `techniques/registry.yaml`에서 선택한다.
-3. 구현 전에 PRD, output schema, eval spec, guardrails, tool contract, retrieval/memory, failure memory, token-efficiency hard gate, cost/caching/model-routing, telemetry, security/privacy, release/rollout plan을 만든다.
-4. 외부 GitHub 레포는 통째로 vendoring하지 않고 `repos/registry.yaml`에 링크/메타데이터/적용 포인트만 기록한다.
-5. 구현 후 실패 케이스를 회귀 테스트와 failure memory로 남긴다.
-6. 토큰 사용량을 비용으로 보고 `cost-and-caching.md`에 max token, cache hit target, pruning rule, fallback, token telemetry를 명시한다.
-7. 구현 준비도를 `readiness-scorecard.md`로 점수화하고 부족한 항목을 표시한다.
-8. 검증 evidence 없이는 완료를 선언하지 않는다.
-9. 자세한 설명 요청이 없으면 기본 응답은 1~2문장으로 제한한다.
+1. `wiki/index.md`가 있으면 먼저 읽어 토큰을 아끼는 경로를 잡고, 중요한 결정은 원본 파일에서 검증한다.
+2. 표준 `intake-form.md`로 첫 입력 품질을 맞추되, 사용자가 한 번에 양식을 채우게 하지 않고 질문-답변으로 한 항목씩 이어간다.
+3. 적용할 Agent Engineering technique을 `wiki/technique-map.md`와 `techniques/taxonomy.yaml`로 좁힌 뒤, `techniques/registry.yaml`의 모든 technique을 선택/거절한다.
+4. 구현 전에 PRD, output schema, eval spec, guardrails, tool contract, retrieval/memory, failure memory, token-efficiency hard gate, cost/caching/model-routing, telemetry, security/privacy, release/rollout plan을 만든다.
+5. 외부 GitHub 레포는 통째로 vendoring하지 않고 `repos/registry.yaml`에 링크/메타데이터/적용 포인트만 기록한다.
+6. 구현 후 실패 케이스를 회귀 테스트와 failure memory로 남긴다.
+7. 토큰 사용량을 비용으로 보고 `cost-and-caching.md`에 max token, cache hit target, pruning rule, fallback, token telemetry를 명시한다.
+8. 구현 준비도를 `readiness-scorecard.md`로 점수화하고 부족한 항목을 표시한다.
+9. 검증 evidence 없이는 완료를 선언하지 않는다.
+10. 자세한 설명 요청이 없으면 기본 응답은 1~2문장으로 제한한다.
 
 ## 빠른 사용법
 
-새 에이전트 작업 폴더 생성 후 `intake-form.md`부터 작성:
+새 에이전트 작업 폴더 생성 후 `workflows/intake.md`에 따라 한 번에 양식을 요구하지 말고 질문-답변으로 `intake-form.md`를 채웁니다:
 
 ```bash
 python3 scripts/new_agent_task.py "internal-doc-report-agent"
@@ -48,12 +49,13 @@ python3 maintainer/scripts/export_user_distribution.py \
 - publish 절차: `maintainer/workflows/publish-user-distribution.md`
 - 수동 PR workflow: `.github/workflows/publish-user-distribution.yml`
 
-사용자 배포본에는 `maintainer/`, GitHub radar workflow, generated `wiki/`, `.omx/`, `.obsidian/`, maintainer test/publish 로직이 포함되지 않습니다.
+사용자 배포본에는 `maintainer/`, GitHub radar workflow, maintainer용 전체 generated wiki, `.omx/`, `.obsidian/`, maintainer test/publish 로직이 포함되지 않습니다.
+사용자 배포본에는 대신 `distribution/user/wiki/`에서 관리되는 **curated user wiki**가 `wiki/`로 포함됩니다. 이 wiki는 사용자가 클론했을 때 에이전트가 전체 문서를 한꺼번에 읽지 않고, technique 선택과 작업 흐름을 빠르게 좁히기 위한 토큰 절약용 지도입니다.
 
 
 ## LLM Wiki / Obsidian
 
-이 레포는 원본 실행 계약을 그대로 유지하면서 `wiki/`를 LLM Wiki 탐색 레이어로 생성합니다. Obsidian으로 보려면 **레포 루트 폴더**를 vault로 열면 됩니다.
+이 maintainer/source 레포는 원본 실행 계약을 그대로 유지하면서 `wiki/`를 전체 LLM Wiki 탐색 레이어로 생성합니다. Obsidian으로 보려면 **레포 루트 폴더**를 vault로 열면 됩니다.
 
 ```bash
 python3 scripts/generate_llm_wiki.py

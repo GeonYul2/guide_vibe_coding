@@ -15,7 +15,7 @@ python3 scripts/new_agent_task.py "my-agent"
 python3 scripts/validate_agent_task.py tasks/my-agent
 ```
 
-They should follow `README.md`, `AGENTS.md`, `agent-playbook.yaml`, `workflows/build-agent.md`, `techniques/registry.yaml`, and `templates/`.
+They should follow `wiki/index.md`, `README.md`, `AGENTS.md`, `agent-playbook.yaml`, `workflows/build-agent.md`, `techniques/taxonomy.yaml`, `techniques/registry.yaml`, and `templates/`.
 
 ## Maintainer path
 
@@ -53,7 +53,7 @@ Publish path:
 - Manual PR workflow: `.github/workflows/publish-user-distribution.yml`
 - Required source-repo secret for PR publishing: `USER_DISTRIBUTION_TOKEN`
 
-The export must not copy `maintainer/`, GitHub radar/update workflows, generated `wiki/`, `.omx/`, `.obsidian/`, or sample tasks into the user distribution.
+The export must not copy `maintainer/`, GitHub radar/update workflows, the full generated maintainer `wiki/`, `.omx/`, `.obsidian/`, or sample tasks into the user distribution. It does copy the curated user wiki from `distribution/user/wiki/` to `wiki/`.
 
 ## Repository readiness report
 
@@ -77,7 +77,7 @@ Use two separate pushes:
 1. Source/maintainer repo — commit and push source-of-truth changes here first.
 2. User distribution repo — run `maintainer/scripts/export_user_distribution.py --prune-excluded --prune-stale` into the separate user checkout, review the diff, then push that repo separately.
 
-Do not push generated maintainer-only reports, radar outputs, wiki, `.omx`, `.obsidian`, or sample tasks to the user distribution repo.
+Do not push generated maintainer-only reports, radar outputs, the full maintainer wiki, `.omx`, `.obsidian`, or sample tasks to the user distribution repo. Only the curated user wiki exported from `distribution/user/wiki/` belongs there.
 
 ## Adoption rule
 

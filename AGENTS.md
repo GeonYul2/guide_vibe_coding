@@ -6,14 +6,19 @@ When an AI coding agent is asked to use this repository for an automation-agent 
 
 ## Mandatory Boot Sequence
 
-1. Read `agent-playbook.yaml`.
-2. Read `techniques/registry.yaml` and `techniques/taxonomy.yaml`.
-3. For ordinary user tasks, do not run maintainer-only discovery. For refresh/discovery work only, read `maintainer/radar-config.yaml` and `maintainer/workflows/weekly-repo-radar.md`.
-4. If supplemental source material such as YouTube videos, articles, or talks is involved, read `sources/registry.yaml` and `workflows/source-ingestion.md`.
-5. Fill `intake-form.md` using `workflows/intake.md`, then classify the user's task using `workflows/build-agent.md`.
-6. If the task intent, scope, non-goals, or success criteria are unclear, run `workflows/deep-interview.md` before planning or coding.
-7. Create or update a task folder under `tasks/<task-slug>/` using `templates/`.
-8. Run `python3 scripts/validate_agent_task.py tasks/<task-slug>` before claiming readiness or completion.
+1. If `wiki/index.md` exists, read it first as a token-saving orientation layer; verify decisions against canonical source files before editing or claiming authority.
+2. Read `agent-playbook.yaml`.
+3. Read `techniques/registry.yaml` and `techniques/taxonomy.yaml`.
+4. For ordinary user tasks, do not run maintainer-only discovery. For refresh/discovery work only, read `maintainer/radar-config.yaml` and `maintainer/workflows/weekly-repo-radar.md`.
+5. If supplemental source material such as YouTube videos, articles, or talks is involved, read `sources/registry.yaml` and `workflows/source-ingestion.md`.
+6. Fill `intake-form.md` using `workflows/intake.md`, then classify the user's task using `workflows/build-agent.md`.
+7. If the task intent, scope, non-goals, or success criteria are unclear, run `workflows/deep-interview.md` before planning or coding.
+8. Create or update a task folder under `tasks/<task-slug>/` using `templates/`.
+9. Run `python3 scripts/validate_agent_task.py tasks/<task-slug>` before claiming readiness or completion.
+
+## Conversational Intake Rule
+
+At task start, do not ask the human to complete the whole intake form in one message. Ask exactly one concise question per round, write each answer into `tasks/<task-slug>/intake-form.md`, infer only low-risk fields from repository context, and continue until all required intake sections are explicit.
 
 ## Non-Negotiable Gates
 

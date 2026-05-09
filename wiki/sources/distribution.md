@@ -12,6 +12,11 @@ This node connects the generated wiki graph to user-distribution override docume
 - [[distribution/user/AGENTS|AGENTS.md]]
 - [[distribution/user/README|README.md]]
 - [[distribution/user/SECURITY|SECURITY.md]]
+- [[distribution/user/wiki/graph-links|graph-links.md]]
+- [[distribution/user/wiki/index|index.md]]
+- [[distribution/user/wiki/technique-map|technique-map.md]]
+- [[distribution/user/wiki/workflows/build-agent|build-agent.md]]
+- [[distribution/user/wiki/workflows/intake|intake.md]]
 
 ## Related Generated Nodes
 
@@ -22,5 +27,6 @@ This node connects the generated wiki graph to user-distribution override docume
 ## Source Boundary
 
 - `distribution/` defines what the user-facing export receives.
-- The user distribution must not include maintainer radar, discovery automation, generated wiki, or publish workflow logic.
+- The user distribution includes `distribution/user/wiki/` as a curated token-saving wiki.
+- The user distribution must not include maintainer radar, discovery automation, the full generated maintainer wiki, or publish workflow logic.
 - Verify exported files with `python3 maintainer/scripts/export_user_distribution.py --dry-run --dest <target>`.

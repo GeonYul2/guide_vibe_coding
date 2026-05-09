@@ -1,9 +1,11 @@
-version: 0.1.0
+version: 0.2.0
 name: agent-helper-user-distribution
 purpose: >
   Export only the user-facing automation-agent helper from the maintainer/source
-  repository. Maintainer radar, GitHub discovery automation, generated wiki,
-  local runtime state, and sample tasks are intentionally excluded.
+  repository. Maintainer radar, GitHub discovery automation, full maintainer
+  generated wiki, local runtime state, and sample tasks are intentionally
+  excluded. A curated user wiki is included to reduce clone-time agent context
+  and route technique selection.
 
 # Paths copied as-is from this source repository into the target repository.
 include:
@@ -27,6 +29,7 @@ overrides:
   - distribution/user/README.md => README.md
   - distribution/user/SECURITY.md => SECURITY.md
   - distribution/user/agent-playbook.yaml => agent-playbook.yaml
+  - distribution/user/wiki/ => wiki/
 
 # These paths must never be copied by the exporter. With --prune-excluded, exactly
 # these target paths are removed to clean up old full-repo exports.
@@ -35,7 +38,6 @@ exclude:
   - .github/workflows/weekly-repo-radar.yml
   - .github/workflows/validate.yml
   - .github/workflows/publish-user-distribution.yml
-  - wiki/
   - .obsidian/
   - .omx/
   - reports/

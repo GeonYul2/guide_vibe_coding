@@ -2,7 +2,18 @@
 
 Use this workflow whenever a user wants to create, modify, or evaluate an automation agent.
 
-## 0. Intake
+## 0. Wiki-First Orientation
+
+If `wiki/index.md` exists, read it first to choose the smallest relevant context path. Use the wiki only for orientation and token reduction; verify artifact requirements, technique IDs, and gate rules against canonical files before writing or claiming authority.
+
+For technique selection, prefer this read order:
+
+1. `wiki/index.md`
+2. `wiki/technique-map.md`
+3. `techniques/taxonomy.yaml`
+4. only the needed entries in `techniques/registry.yaml`, then all registry IDs when filling final select/reject coverage
+
+## 1. Task Scaffold
 
 Read:
 
@@ -17,7 +28,7 @@ Create a task folder:
 python3 scripts/new_agent_task.py "<task-slug>"
 ```
 
-## 1. Standardized Intake Gate
+## 2. Standardized Intake Gate
 
 Fill `intake-form.md` first. This is the normalized user-start contract and must cover:
 
@@ -33,11 +44,13 @@ Fill `intake-form.md` first. This is the normalized user-start contract and must
 - tools / data access
 - evidence of success
 
+Use `workflows/intake.md` as a conversational Q&A loop: ask exactly one missing-field question per round, write each answer into `intake-form.md`, and do not ask the human to complete the whole form at once.
+
 If any field is missing, vague, or marked `Unknown - follow up required`, run `workflows/deep-interview.md` before PRD synthesis, technique selection, or implementation.
 
 Translate completed intake into `agent-prd.md`; do not skip the PRD.
 
-## 2. Deep Interview Gate
+## 3. Deep Interview Gate
 
 If any of the following are unclear, run `workflows/deep-interview.md` before implementation:
 
@@ -50,18 +63,18 @@ If any of the following are unclear, run `workflows/deep-interview.md` before im
 - Human approval boundaries
 - Failure handling expectations
 
-## 3. Technique Selection Gate
+## 4. Technique Selection Gate
 
 Fill `technique-selection.yaml`.
 
-Use `techniques/taxonomy.yaml` to classify the agent context and prioritize must/should/optional techniques. Then, for every technique in `techniques/registry.yaml`:
+Use `wiki/technique-map.md` when present to identify the likely task profile with fewer tokens, then verify against `techniques/taxonomy.yaml` to classify the agent context and prioritize must/should/optional techniques. Then, for every technique in `techniques/registry.yaml`:
 
 - select it, or
 - reject it with a concrete reason.
 
 Do not silently ignore techniques.
 
-## 4. Structured Output Gate
+## 5. Structured Output Gate
 
 Fill `output-schema.md` before coding.
 
@@ -73,7 +86,7 @@ Minimum schema contract:
 - valid and invalid golden examples
 - eval cases that prove schema compliance
 
-## 5. Harness / Eval Gate
+## 6. Harness / Eval Gate
 
 Fill `eval-spec.md` before coding.
 
@@ -86,7 +99,7 @@ Minimum eval plan:
 - invalid structured output path
 - known regression cases
 
-## 6. Guardrail Gate
+## 7. Guardrail Gate
 
 Fill `guardrails.md`.
 
@@ -98,7 +111,7 @@ Define:
 - human handoff triggers
 - adversarial/unsafe eval cases
 
-## 7. Tool Contract Gate
+## 8. Tool Contract Gate
 
 Fill `tool-contracts.md` for every API/script/database/browser/internal service.
 
@@ -113,7 +126,7 @@ Include:
 - error classes
 - human approval requirements
 
-## 8. Retrieval and Memory Gate
+## 9. Retrieval and Memory Gate
 
 Fill `retrieval-memory.md` when the agent uses sources, RAG, vector search, internal documents, or session/long-term memory.
 
@@ -126,7 +139,7 @@ Define:
 - freshness and invalidation rules
 - privacy filters
 
-## 9. Failure Memory Gate
+## 10. Failure Memory Gate
 
 Fill `failure-cases.md`.
 
@@ -138,7 +151,7 @@ Every observed failure must become one of:
 - guardrail/tripwire update
 - human handoff rule
 
-## 10. Token Efficiency, Cost, Caching, and Model Routing Gate
+## 11. Token Efficiency, Cost, Caching, and Model Routing Gate
 
 Fill `cost-and-caching.md` and `model-routing.md`.
 
@@ -156,7 +169,7 @@ Define:
 - token telemetry fields
 - fallback behavior when budget or quality gates fail
 
-## 11. Telemetry Gate
+## 12. Telemetry Gate
 
 Fill `telemetry.md`.
 
@@ -168,7 +181,7 @@ Define:
 - correlation ids
 - alerts and owners
 
-## 12. Security and Privacy Gate
+## 13. Security and Privacy Gate
 
 Fill `security-privacy.md` when the agent touches company/customer/internal data, credentials, logs, or regulated information.
 
@@ -181,7 +194,7 @@ Define:
 - retention/deletion
 - audit owner and cadence
 
-## 13. Release and Rollout Gate
+## 14. Release and Rollout Gate
 
 Fill `release-rollout.md` when the agent will run outside a local prototype.
 
@@ -193,11 +206,11 @@ Define:
 - rollback process
 - post-deploy eval/monitoring checks
 
-## 14. Implementation Plan Gate
+## 15. Implementation Plan Gate
 
 Fill `implementation-plan.md` with small, reversible steps and verification commands.
 
-## 15. Validate Before Implementation
+## 16. Validate Before Implementation
 
 Run:
 
@@ -207,7 +220,7 @@ python3 scripts/validate_agent_task.py tasks/<task-slug>
 
 Implementation is blocked until validation passes.
 
-## 16. Implement and Verify
+## 17. Implement and Verify
 
 After implementation:
 

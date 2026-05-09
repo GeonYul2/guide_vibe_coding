@@ -1,15 +1,30 @@
-version: 0.3.0
+version: 0.3.1
 purpose: >
   Machine-readable execution contract for agents building automation agents with this repository.
   Ordinary users follow the core build-agent workflow. Maintainers use the optional refresh loop to discover hot GitHub technique repositories; videos/articles are supplemental source ingestion.
 default_workflow: workflows/build-agent.md
 required_boot_files:
   - AGENTS.md
+  - wiki/index.md
   - agent-playbook.yaml
   - techniques/registry.yaml
   - techniques/taxonomy.yaml
   - workflows/intake.md
   - workflows/build-agent.md
+token_efficient_boot:
+  orientation_file: wiki/index.md
+  rule: >
+    Use the wiki as the first-pass map for choosing the smallest relevant
+    canonical files. The wiki is not authoritative; verify technique IDs,
+    gates, and artifact requirements against AGENTS.md, agent-playbook.yaml,
+    techniques/*.yaml, workflows/*.md, and templates/* before claims.
+intake_mode:
+  style: conversational_question_answer
+  max_questions_per_round: 1
+  artifact: tasks/<task-slug>/intake-form.md
+  rule: >
+    Ask one missing-field question at a time, write each answer into the intake
+    artifact, and do not request the full intake form in a single chat turn.
 required_artifacts:
   - path: intake-form.md
     template: templates/intake-form.md

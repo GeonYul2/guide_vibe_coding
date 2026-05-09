@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Generate an Obsidian-compatible LLM wiki from repo contracts.
+"""Generate an Obsidian-compatible maintainer/source LLM wiki from repo contracts.
 
 The generated wiki is a navigation and context-compilation layer only. Canonical
 source remains AGENTS.md, agent-playbook.yaml, techniques/*.yaml, workflows/*,
 templates/*, tasks/*, distribution/*, and maintainer/* for maintainer-only
-operations.
+operations. The user distribution receives a smaller curated wiki from
+distribution/user/wiki/, not this full maintainer wiki.
 """
 from __future__ import annotations
 
@@ -623,7 +624,8 @@ This node connects the generated wiki graph to user-distribution override docume
 ## Source Boundary
 
 - `distribution/` defines what the user-facing export receives.
-- The user distribution must not include maintainer radar, discovery automation, generated wiki, or publish workflow logic.
+- The user distribution includes `distribution/user/wiki/` as a curated token-saving wiki.
+- The user distribution must not include maintainer radar, discovery automation, the full generated maintainer wiki, or publish workflow logic.
 - Verify exported files with `python3 maintainer/scripts/export_user_distribution.py --dry-run --dest <target>`.
 """,
     )
