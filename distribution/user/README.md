@@ -1,45 +1,98 @@
 # Agent Engineering Guide — User Distribution
 
-이 레포는 **자동화 에이전트를 설계·검증하기 위한 사용자용 helper 배포본**입니다. Maintainer 전용 GitHub radar, technique discovery, publish workflow, 전체 generated wiki는 포함하지 않고, 대신 토큰 절약용 curated `wiki/`를 포함합니다.
+이 레포는 **자동화 에이전트를 만들고 검증할 때 사용하는 사용자용 시작 가이드**입니다. 사용자는 복잡한 템플릿을 직접 채우지 않아도 됩니다. 원하는 자동화 아이디어를 자연어로 말하면, 에이전트가 질문을 하나씩 이어가며 필요한 문서와 검증 항목을 만들어 줍니다.
 
-## 빠른 사용법
+## 이렇게 시작해보세요
 
-```bash
-python3 scripts/new_agent_task.py "internal-doc-report-agent"
-python3 scripts/validate_agent_task.py tasks/internal-doc-report-agent
+Codex, Claude Code, Cursor 같은 코딩 에이전트에서 이 폴더를 열고 아래처럼 말해보세요.
+
+```text
+고객 문의 메일을 읽고 답장 초안을 만들어주는 에이전트를 만들고 싶어.
 ```
 
-에이전트는 먼저 `wiki/index.md`로 필요한 문맥을 좁힌 뒤 `AGENTS.md`, `agent-playbook.yaml`, `workflows/build-agent.md`, `techniques/taxonomy.yaml`, `techniques/registry.yaml`, `templates/`를 원본 기준으로 검증합니다.
+또는 더 짧게 시작해도 됩니다.
 
-새 작업의 첫 입력은 한 번에 양식 전체를 요구하지 않습니다. `workflows/intake.md`에 따라 한 질문씩 답을 받고, 각 답을 `tasks/<task-slug>/intake-form.md`에 누적합니다.
+```text
+반복 업무 하나를 자동화하는 에이전트를 만들고 싶어.
+```
 
-## 사용자 경계
+그러면 에이전트는 긴 설명이나 양식을 먼저 던지지 않고, 보통 아래 한 문장으로 시작합니다.
 
-- 새 작업은 `tasks/<task-slug>/intake-form.md`부터 작성합니다.
-- intake는 질문-답변 흐름으로 진행하고, 전체 12개 항목을 첫 메시지에 던지지 않습니다.
-- 구현 전 필수 산출물을 모두 채우고 validator를 통과해야 합니다.
-- 이 배포본은 GitHub technique radar를 실행하지 않습니다.
-- technique 업데이트/레이더/배포 publish는 source/maintainer 레포에서만 관리합니다.
+```text
+토큰 절감모드로 시작할까요?
+```
 
-## User Wiki
+답을 하면 에이전트가 한 번에 한 질문씩 이어가며 목적, 사용자, 입력, 출력, 자동 실행 가능 범위, 사람 승인이 필요한 부분, 금지할 작업, 성공 기준을 정리합니다.
 
-- 시작점: `wiki/index.md`
-- technique 선택 지도: `wiki/technique-map.md`
-- intake/build 흐름 요약: `wiki/workflows/`
+## 진행 중에 보게 되는 것
 
-`wiki/`는 토큰 절약용 지도이고 최종 근거가 아닙니다. 최종 선택/거절 이유는 반드시 `techniques/taxonomy.yaml`, `techniques/registry.yaml`, task-local `technique-selection.yaml`에서 검증합니다.
+에이전트는 대화를 바탕으로 `tasks/<task-slug>/` 아래에 작업 문서를 만듭니다. 사용자가 직접 처음부터 모든 파일을 채울 필요는 없습니다.
 
-## 핵심 파일
+대략 이런 흐름으로 진행됩니다.
 
-- `AGENTS.md` — 사용자 배포본용 에이전트 실행 계약
-- `agent-playbook.yaml` — 필수 산출물과 게이트의 기계 판독 정의
-- `workflows/` — intake, deep interview, build-agent 흐름
-- `wiki/` — 토큰 절약용 user wiki와 technique 선택 지도
-- `templates/` — task 산출물 템플릿
-- `techniques/` — 선택/거절해야 하는 agent-engineering technique registry
-- `scripts/new_agent_task.py` — task scaffold 생성
-- `scripts/validate_agent_task.py` — readiness/completion artifact 검증
+1. 만들고 싶은 자동화 에이전트의 목적을 묻습니다.
+2. 누가 쓰고, 지금 어떤 업무가 불편한지 묻습니다.
+3. 어떤 입력을 받고 어떤 결과를 내야 하는지 정리합니다.
+4. 에이전트가 혼자 해도 되는 일과 사람 승인이 필요한 일을 나눕니다.
+5. 하면 안 되는 일과 첫 버전에서 제외할 범위를 정합니다.
+6. 성공 예시, 실패 예시, 테스트 기준을 함께 만듭니다.
+7. 필요한 문서와 검증 파일을 채운 뒤 readiness validator로 확인합니다.
 
-## 보안 경계
+검증이 필요할 때는 에이전트가 아래 명령을 사용합니다.
 
-이 배포본은 표준 라이브러리 Python 스크립트와 Markdown/YAML만 포함합니다. GitHub Actions, maintainer radar, 외부 저장소 clone/install/execute 로직은 포함하지 않습니다.
+```bash
+python3 scripts/validate_agent_task.py tasks/<task-slug>
+```
+
+## 에이전트가 알아서 꺼내 쓰는 테크닉들
+
+사용자는 technique ID나 YAML 파일을 외울 필요가 없습니다. 진행 과정에서 에이전트가 맥락에 맞춰 필요한 테크닉을 선택하거나 제외하고, 나중에 왜 그렇게 했는지 설명합니다.
+
+| 쉬운 이름 | 에이전트가 해주는 일 | 이런 상황에서 특히 중요합니다 |
+| --- | --- | --- |
+| 시작 질문 정리 | 목적, 사용자, 입력, 출력, 성공 기준을 빠뜨리지 않게 묻습니다. | 모든 새 에이전트 작업 |
+| 깊은 인터뷰 | 애매한 요구를 구체적인 업무 흐름과 승인 경계로 바꿉니다. | “대충 자동화해줘”처럼 범위가 흐릴 때 |
+| 출력 형식 검증 | 결과를 JSON, Markdown, 표 등 정해진 형식으로 안정적으로 만들게 합니다. | 결과를 다른 도구가 읽거나 저장할 때 |
+| 테스트와 회귀 방지 | 성공/실패 사례를 테스트로 남겨 품질이 나중에 떨어지지 않게 합니다. | 반복 실행하거나 운영에 넣을 때 |
+| 실패 사례 기억 | 애매한 입력, 도구 오류, 안전 이슈를 기록해 다음 개선에 반영합니다. | 실사용 중 문제가 생길 수 있을 때 |
+| 안전장치와 중단선 | 위험한 요청, 외부 발송, 삭제, 결제, 권한 변경을 멈추거나 승인받게 합니다. | 사람·돈·데이터에 영향을 줄 때 |
+| 도구 사용 계약 | API, 파일, DB, 브라우저 같은 도구를 어떤 권한으로 쓸지 정합니다. | 에이전트가 실제 시스템을 조작할 때 |
+| 권한 있는 실행 | 자동 실행 가능한 일과 사람 확인이 필요한 일을 분리합니다. | 업무 데이터 변경, 외부 메시지 발송, 배포가 있을 때 |
+| 보안·개인정보 보호 | 회사/고객 데이터, 인증정보, 로그를 최소 권한·마스킹·보관 규칙으로 다룹니다. | 내부 문서, 고객정보, 계정 권한을 다룰 때 |
+| 비용·토큰 예산 | 한 번 실행에 쓸 수 있는 토큰·비용·캐시 기준을 정합니다. | 반복 업무, 대량 문서, 유료 모델 호출이 있을 때 |
+| 모델 선택과 대체 | 쉬운 일은 가벼운 모델, 어려운 일은 강한 모델로 보내고 실패 시 대체 경로를 둡니다. | 비용과 품질을 함께 관리해야 할 때 |
+| 관찰·로그·텔레메트리 | 무엇을 판단했고 어떤 도구를 썼고 비용이 얼마였는지 추적합니다. | 운영, 감사, 품질 개선이 필요할 때 |
+| 배포·카나리·롤백 | 작게 실험하고, 문제가 생기면 멈추고 되돌리는 절차를 둡니다. | 실제 사용자나 운영 환경에 배포할 때 |
+| 짧은 운영 계약 | 에이전트가 어떻게 말하고, 언제 묻고, 언제 멈출지 짧게 정합니다. | 팀이 반복해서 같은 에이전트를 쓸 때 |
+| 범위 통제 | 첫 버전에서 하지 않을 일을 명확히 하고 작은 변경만 하게 합니다. | 기능 욕심으로 프로젝트가 커질 때 |
+| 문서·지식 관리 | 위키, 문서, 검색 메모리를 기준으로 근거 있는 답을 만들게 합니다. | 내부 문서나 지식 기반을 쓰는 에이전트 |
+
+## 완성 후 받을 수 있는 설명
+
+완성된 에이전트는 단순히 “작동한다”에서 끝나지 않아야 합니다. 최종 보고에서는 보통 아래 내용을 확인할 수 있습니다.
+
+- 어떤 테크닉을 적용했는지
+- 왜 그 테크닉이 이 업무에 필요했는지
+- 적용하지 않은 테크닉은 왜 제외했는지
+- 어떤 테스트, 체크리스트, validator 결과로 검증했는지
+- 운영 전에 사람이 확인해야 할 남은 위험은 무엇인지
+
+## 사용자가 기억할 것
+
+- 처음에는 만들고 싶은 자동화 아이디어를 자연어로 말하면 됩니다.
+- 긴 양식을 직접 채우지 않아도 됩니다. 에이전트가 한 질문씩 물어봅니다.
+- 위험하거나 외부에 영향을 주는 일은 사람 승인 경계를 정해야 합니다.
+- 이 배포본은 사용자용입니다. GitHub radar, technique discovery, publish 같은 maintainer 작업은 source/maintainer 레포에서 관리합니다.
+
+## 참고 파일
+
+보통 사용자가 직접 읽을 필요는 없지만, 진행 근거를 확인하고 싶다면 아래 파일을 보면 됩니다.
+
+- `AGENTS.md` — 에이전트가 따라야 하는 실행 계약
+- `agent-playbook.yaml` — 필수 산출물과 검증 게이트 정의
+- `workflows/intake.md` — 한 질문씩 진행하는 시작 인터뷰 흐름
+- `workflows/build-agent.md` — 에이전트를 설계·검증하는 전체 흐름
+- `wiki/` — 토큰 절약용 안내 지도
+- `templates/` — 에이전트가 채워 넣는 문서 템플릿
+- `techniques/` — 선택하거나 제외할 수 있는 agent-engineering technique 목록
+- `scripts/validate_agent_task.py` — 완성도를 확인하는 검증 스크립트

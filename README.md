@@ -17,21 +17,27 @@
 9. 검증 evidence 없이는 완료를 선언하지 않는다.
 10. 자세한 설명 요청이 없으면 기본 응답은 1~2문장으로 제한한다.
 
-## 빠른 사용법
+## 사용자 시작 방식
 
-새 에이전트 작업 폴더 생성 후 `workflows/intake.md`에 따라 한 번에 양식을 요구하지 말고 질문-답변으로 `intake-form.md`를 채웁니다:
+일반 사용자는 스크립트 이름부터 외울 필요가 없습니다. 이 레포를 코딩 에이전트의 작업 폴더로 열고, 아래처럼 자연어로 시작하면 됩니다.
 
-```bash
-python3 scripts/new_agent_task.py "internal-doc-report-agent"
+```text
+고객 문의 메일을 읽고 답장 초안을 만들어주는 에이전트를 만들고 싶어.
 ```
 
-필수 산출물 검증:
+그러면 에이전트는 먼저 아래 한 문장으로 시작한 뒤, 한 번에 한 질문씩 필요한 정보를 모읍니다.
 
-```bash
-python3 scripts/validate_agent_task.py tasks/internal-doc-report-agent
+```text
+토큰 절감모드로 시작할까요?
 ```
 
-일반 사용자는 여기까지가 기본 경로입니다. technique 업데이트, GitHub radar, 후보 점수화는 `maintainer/README.md`를 볼 때만 실행합니다.
+대화가 진행되면 에이전트가 `tasks/<task-slug>/` 아래에 intake, PRD, eval, guardrails, tool contract 같은 산출물을 만들고, 필요할 때 아래 검증을 실행합니다.
+
+```bash
+python3 scripts/validate_agent_task.py tasks/<task-slug>
+```
+
+일반 사용자의 기본 경로는 “자연어 요청 → 한 질문씩 인터뷰 → 산출물 생성 → validator 검증”입니다. technique 업데이트, GitHub radar, 후보 점수화는 `maintainer/README.md`를 볼 때만 실행합니다.
 
 ## 사용자 배포본 분리
 
