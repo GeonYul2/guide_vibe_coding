@@ -99,6 +99,7 @@ mandatory_technique_consideration:
   - security_privacy_data_governance
   - deployment_rollout_canary
   - concise_operating_contract
+  - karpathy_claude_md_discipline
   - scope_control_and_minimal_diff
   - agent_harness_runtime_design
   - permissioned_tool_execution

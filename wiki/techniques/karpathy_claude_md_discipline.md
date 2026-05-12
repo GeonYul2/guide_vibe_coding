@@ -1,14 +1,14 @@
 ---
 type: technique
-id: tool_contracts
+id: karpathy_claude_md_discipline
 source: techniques/registry.yaml
 ---
 
-# Tool Contract Design
+# Karpathy CLAUDE.md Coding Discipline
 
 ## When to Apply
 
-The agent calls APIs, scripts, databases, browsers, or internal systems.
+An agent writes, reviews, refactors, or plans code changes; or when creating AGENTS.md/CLAUDE.md-style operating rules.
 
 ## Selection Guidance
 
@@ -19,29 +19,26 @@ The agent calls APIs, scripts, databases, browsers, or internal systems.
 
 ## Prerequisites / Before This
 
-- None recorded.
+- [[wiki/techniques/concise_operating_contract|Concise Agent Operating Contract]]
 
 ## Next / Enables
 
-- [[wiki/techniques/permissioned_tool_execution|Permissioned Tool Execution]]
+- [[wiki/techniques/scope_control_and_minimal_diff|Scope Control and Minimal Diff Discipline]]
 
 ## Similar / Compare With
 
-- [[wiki/techniques/agent_harness_runtime_design|Agent Harness Runtime Design]]
-- [[wiki/techniques/deployment_rollout_canary|Deployment, Rollout, and Canary Strategy]]
-- [[wiki/techniques/eval_regression_loop|Eval and Regression Loop]]
-- [[wiki/techniques/harness_engineering|Harness Engineering]]
-- [[wiki/techniques/model_routing_fallback_policy|Model Routing and Fallback Policy]]
-- [[wiki/techniques/permissioned_tool_execution|Permissioned Tool Execution]]
-- [[wiki/techniques/structured_output_schema_validation|Structured Output Schema Validation]]
+- [[wiki/techniques/agent_readiness_scoring|Agent Readiness Scoring / Gap Map]]
+- [[wiki/techniques/concise_operating_contract|Concise Agent Operating Contract]]
+- [[wiki/techniques/deep_interview|Deep Interview / Requirement Crystallization]]
+- [[wiki/techniques/default_response_brevity|Default Response Brevity]]
+- [[wiki/techniques/prompt_versioning|Prompt and Policy Versioning]]
+- [[wiki/techniques/scope_control_and_minimal_diff|Scope Control and Minimal Diff Discipline]]
+- [[wiki/techniques/standardized_intake_gate|Standardized Intake Quality Gate]]
 
 ## Commonly Used With
 
-- [[wiki/techniques/agent_harness_runtime_design|Agent Harness Runtime Design]]
 - [[wiki/techniques/agent_readiness_scoring|Agent Readiness Scoring / Gap Map]]
 - [[wiki/techniques/concise_operating_contract|Concise Agent Operating Contract]]
-- [[wiki/techniques/cost_budgeting|Cost Budgeting]]
-- [[wiki/techniques/deep_interview|Deep Interview / Requirement Crystallization]]
 - [[wiki/techniques/default_response_brevity|Default Response Brevity]]
 - [[wiki/techniques/deployment_rollout_canary|Deployment, Rollout, and Canary Strategy]]
 - [[wiki/techniques/eval_regression_loop|Eval and Regression Loop]]
@@ -49,30 +46,26 @@ The agent calls APIs, scripts, databases, browsers, or internal systems.
 - [[wiki/techniques/genai_telemetry_standardization|GenAI Telemetry Standardization]]
 - [[wiki/techniques/guardrails_tripwires|Guardrails and Tripwires]]
 - [[wiki/techniques/harness_engineering|Harness Engineering]]
-- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/model_routing_fallback_policy|Model Routing and Fallback Policy]]
 - [[wiki/techniques/observability_tracing|Observability and Trace Logging]]
 - [[wiki/techniques/permissioned_tool_execution|Permissioned Tool Execution]]
-- [[wiki/techniques/retrieval_memory_governance|Retrieval and Memory Governance]]
-- [[wiki/techniques/safety_handoff_boundaries|Safety and Human Handoff Boundaries]]
 - [[wiki/techniques/scope_control_and_minimal_diff|Scope Control and Minimal Diff Discipline]]
-- [[wiki/techniques/security_privacy_data_governance|Security, Privacy, and Data Governance]]
 - [[wiki/techniques/standardized_intake_gate|Standardized Intake Quality Gate]]
 - [[wiki/techniques/structured_output_schema_validation|Structured Output Schema Validation]]
-- [[wiki/techniques/token_context_caching|Token / Context Caching]]
 - [[wiki/techniques/token_efficiency_budget_gate|Token Efficiency Budget Gate]]
+- [[wiki/techniques/tool_contracts|Tool Contract Design]]
 
 ## Required Output
 
-tool-contracts.md
+AGENTS.md, implementation-plan.md, and eval-spec.md
 
 ## Operating Notes
 
-See registry.
+Make the four behavioral rules explicit: think before coding by surfacing assumptions and ambiguity; choose the simplest non-speculative implementation; make surgical changes only; and drive execution from concrete success criteria with verification before claiming completion.
 
 ## Source References
 
-Registry-defined / local policy
+sources/registry.yaml#youtube-karpathy-65-line-claude-md
 
 ## Canonical Source Nodes
 

@@ -24,6 +24,21 @@ Agent behavior:
 - Make behavior constraints explicit.
 - Verify before claiming completion.
 
+
+### Karpathy CLAUDE.md coding discipline
+
+Enforcement point:
+
+- `techniques/registry.yaml#karpathy_claude_md_discipline`
+- `AGENTS.md` or project-local `CLAUDE.md` / instruction files
+
+Agent behavior:
+
+- Think before coding: surface assumptions, ambiguity, and tradeoffs.
+- Simplicity first: avoid speculative features, abstractions, and dependencies.
+- Surgical changes: edit only what the request requires.
+- Goal-driven execution: define success criteria, run checks, and verify before claiming completion.
+
 ### Scope control and minimal diff
 
 Enforcement point:

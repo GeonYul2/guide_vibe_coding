@@ -12,12 +12,14 @@ categories:
       - deep_interview
       - agent_readiness_scoring
       - scope_control_and_minimal_diff
+      - karpathy_claude_md_discipline
 
   - id: operating_contracts
     name: Agent Operating Contracts
     description: Rules that govern how the agent communicates, edits, and evolves prompts/policies.
     techniques:
       - concise_operating_contract
+      - karpathy_claude_md_discipline
       - default_response_brevity
       - prompt_versioning
       - scope_control_and_minimal_diff
@@ -133,6 +135,7 @@ agent_context_profiles:
       must:
         - standardized_intake_gate
         - concise_operating_contract
+        - karpathy_claude_md_discipline
         - scope_control_and_minimal_diff
         - structured_output_schema_validation
         - harness_engineering

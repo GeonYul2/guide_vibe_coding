@@ -40,6 +40,8 @@ selected:
     reason: Manual maintainer runs and PR creation need staged rollout, kill switch, and rollback rules.
   - id: concise_operating_contract
     reason: The radar agent should have a compact, enforceable operating contract for future maintainers and coding agents.
+  - id: karpathy_claude_md_discipline
+    reason: Future radar maintainers need explicit think-before-coding, simplicity, surgical-change, and goal-driven verification rules before changing technique registries.
   - id: scope_control_and_minimal_diff
     reason: Repository guide changes should be small, reviewable, and limited to radar artifacts unless explicitly approved.
   - id: agent_harness_runtime_design

@@ -129,7 +129,7 @@ def technique_relationships(
         ["token_context_caching", "cost_budgeting", "token_efficiency_budget_gate", "model_routing_fallback_policy"],
         ["guardrails_tripwires", "safety_handoff_boundaries", "security_privacy_data_governance", "deployment_rollout_canary"],
         ["source_backed_technique_ingestion", "llm_wiki_context_compilation", "wiki_first_source_verification"],
-        ["concise_operating_contract", "default_response_brevity", "prompt_versioning", "scope_control_and_minimal_diff"],
+        ["concise_operating_contract", "karpathy_claude_md_discipline", "scope_control_and_minimal_diff", "default_response_brevity", "prompt_versioning"],
     ]
     known = set(ids)
     for chain in chains:

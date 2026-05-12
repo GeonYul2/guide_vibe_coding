@@ -40,6 +40,8 @@ selected:
     reason: 상담원 보조 도구라도 내부 canary와 kill switch 없이 확대하면 위험하다.
   - id: concise_operating_contract
     reason: 상담원과 운영자가 반복 사용하는 agent라 짧고 강제 가능한 운영 규칙이 필요하다.
+  - id: karpathy_claude_md_discipline
+    reason: 첫 버전 agent와 향후 코드 변경 모두 가정 노출, 단순 구현, 좁은 변경, 검증 후 완료 보고 원칙을 따라야 한다.
   - id: scope_control_and_minimal_diff
     reason: 첫 버전은 초안 작성과 handoff에 집중하고 외부 상태 변경을 피해야 한다.
   - id: agent_harness_runtime_design

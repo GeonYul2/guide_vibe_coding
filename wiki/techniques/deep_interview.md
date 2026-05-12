@@ -28,6 +28,7 @@ Task intent, scope, non-goals, success criteria, or decision boundaries are uncl
 ## Similar / Compare With
 
 - [[wiki/techniques/agent_readiness_scoring|Agent Readiness Scoring / Gap Map]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/scope_control_and_minimal_diff|Scope Control and Minimal Diff Discipline]]
 - [[wiki/techniques/standardized_intake_gate|Standardized Intake Quality Gate]]
 

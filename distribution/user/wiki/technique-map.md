@@ -17,6 +17,7 @@ Use this page to narrow technique selection before reading larger canonical YAML
 - `structured_output_schema_validation` when output is machine-consumed
 - `eval_regression_loop` and `failed_case_memory` for behavior proof
 - `token_efficiency_budget_gate` for business or repeated automation
+- `karpathy_claude_md_discipline` for coding agents, AGENTS.md/CLAUDE.md rules, and refactoring work
 - `tool_contracts`, `permissioned_tool_execution`, `guardrails_tripwires`, and `safety_handoff_boundaries` when tools or external side effects are involved
 
 ## Profile: Coding / Refactoring Agent
@@ -25,6 +26,7 @@ Must:
 
 - `standardized_intake_gate`
 - `concise_operating_contract`
+- `karpathy_claude_md_discipline`
 - `scope_control_and_minimal_diff`
 - `structured_output_schema_validation`
 - `harness_engineering`

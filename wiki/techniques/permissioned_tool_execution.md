@@ -52,6 +52,7 @@ The agent can read/write files, call APIs, run commands, use browsers, or mutate
 - [[wiki/techniques/genai_telemetry_standardization|GenAI Telemetry Standardization]]
 - [[wiki/techniques/guardrails_tripwires|Guardrails and Tripwires]]
 - [[wiki/techniques/harness_engineering|Harness Engineering]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/model_routing_fallback_policy|Model Routing and Fallback Policy]]
 - [[wiki/techniques/observability_tracing|Observability and Trace Logging]]
 - [[wiki/techniques/safety_handoff_boundaries|Safety and Human Handoff Boundaries]]

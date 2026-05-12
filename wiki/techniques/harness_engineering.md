@@ -49,6 +49,7 @@ The agent has repeatable inputs/outputs, tool calls, or multi-step behavior.
 - [[wiki/techniques/failed_case_memory|Failed-Case Memory]]
 - [[wiki/techniques/genai_telemetry_standardization|GenAI Telemetry Standardization]]
 - [[wiki/techniques/guardrails_tripwires|Guardrails and Tripwires]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/model_routing_fallback_policy|Model Routing and Fallback Policy]]
 - [[wiki/techniques/observability_tracing|Observability and Trace Logging]]
 - [[wiki/techniques/permissioned_tool_execution|Permissioned Tool Execution]]

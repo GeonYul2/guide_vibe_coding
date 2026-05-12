@@ -55,6 +55,7 @@ The agent performs multi-step decisions or external side effects.
 - [[wiki/techniques/genai_telemetry_standardization|GenAI Telemetry Standardization]]
 - [[wiki/techniques/guardrails_tripwires|Guardrails and Tripwires]]
 - [[wiki/techniques/harness_engineering|Harness Engineering]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/llm_wiki_context_compilation|LLM Wiki Context Compilation]]
 - [[wiki/techniques/model_routing_fallback_policy|Model Routing and Fallback Policy]]
 - [[wiki/techniques/obsidian_graph_knowledge_ops|Obsidian Graph Knowledge Operations]]

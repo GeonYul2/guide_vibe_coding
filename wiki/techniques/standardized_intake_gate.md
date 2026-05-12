@@ -29,6 +29,7 @@ Every new automation-agent task, before deep interview, PRD synthesis, technique
 
 - [[wiki/techniques/agent_readiness_scoring|Agent Readiness Scoring / Gap Map]]
 - [[wiki/techniques/deep_interview|Deep Interview / Requirement Crystallization]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/scope_control_and_minimal_diff|Scope Control and Minimal Diff Discipline]]
 
 ## Commonly Used With
@@ -45,6 +46,7 @@ Every new automation-agent task, before deep interview, PRD synthesis, technique
 - [[wiki/techniques/genai_telemetry_standardization|GenAI Telemetry Standardization]]
 - [[wiki/techniques/guardrails_tripwires|Guardrails and Tripwires]]
 - [[wiki/techniques/harness_engineering|Harness Engineering]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/llm_wiki_context_compilation|LLM Wiki Context Compilation]]
 - [[wiki/techniques/model_routing_fallback_policy|Model Routing and Fallback Policy]]
 - [[wiki/techniques/observability_tracing|Observability and Trace Logging]]

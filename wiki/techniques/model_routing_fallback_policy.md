@@ -53,6 +53,7 @@ The agent has variable task difficulty, budget tiers, latency targets, reliabili
 - [[wiki/techniques/genai_telemetry_standardization|GenAI Telemetry Standardization]]
 - [[wiki/techniques/guardrails_tripwires|Guardrails and Tripwires]]
 - [[wiki/techniques/harness_engineering|Harness Engineering]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/llm_wiki_context_compilation|LLM Wiki Context Compilation]]
 - [[wiki/techniques/observability_tracing|Observability and Trace Logging]]
 - [[wiki/techniques/obsidian_graph_knowledge_ops|Obsidian Graph Knowledge Operations]]

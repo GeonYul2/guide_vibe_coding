@@ -19,7 +19,7 @@ The agent communicates progress, results, blockers, or next steps to a human.
 
 ## Prerequisites / Before This
 
-- [[wiki/techniques/concise_operating_contract|Concise Agent Operating Contract]]
+- [[wiki/techniques/scope_control_and_minimal_diff|Scope Control and Minimal Diff Discipline]]
 
 ## Next / Enables
 
@@ -28,6 +28,7 @@ The agent communicates progress, results, blockers, or next steps to a human.
 ## Similar / Compare With
 
 - [[wiki/techniques/concise_operating_contract|Concise Agent Operating Contract]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/prompt_versioning|Prompt and Policy Versioning]]
 - [[wiki/techniques/scope_control_and_minimal_diff|Scope Control and Minimal Diff Discipline]]
 
@@ -42,6 +43,7 @@ The agent communicates progress, results, blockers, or next steps to a human.
 - [[wiki/techniques/genai_telemetry_standardization|GenAI Telemetry Standardization]]
 - [[wiki/techniques/guardrails_tripwires|Guardrails and Tripwires]]
 - [[wiki/techniques/harness_engineering|Harness Engineering]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/llm_wiki_context_compilation|LLM Wiki Context Compilation]]
 - [[wiki/techniques/model_routing_fallback_policy|Model Routing and Fallback Policy]]
 - [[wiki/techniques/observability_tracing|Observability and Trace Logging]]

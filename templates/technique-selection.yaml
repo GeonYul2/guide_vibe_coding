@@ -40,6 +40,8 @@ selected:
     reason: TODO
   - id: concise_operating_contract
     reason: TODO
+  - id: karpathy_claude_md_discipline
+    reason: TODO
   - id: scope_control_and_minimal_diff
     reason: TODO
   - id: agent_harness_runtime_design

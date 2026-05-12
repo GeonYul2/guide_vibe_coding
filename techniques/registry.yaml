@@ -163,6 +163,18 @@ techniques:
       Require small reversible changes, no opportunistic refactors, explicit non-goals,
       and verification tied to the requested behavior.
 
+  - id: karpathy_claude_md_discipline
+    name: Karpathy CLAUDE.md Coding Discipline
+    enforcement: mandatory_consideration
+    source_refs:
+      - sources/registry.yaml#youtube-karpathy-65-line-claude-md
+    apply_when: An agent writes, reviews, refactors, or plans code changes; or when creating AGENTS.md/CLAUDE.md-style operating rules.
+    output: AGENTS.md, implementation-plan.md, and eval-spec.md
+    notes: >
+      Make the four behavioral rules explicit: think before coding by surfacing assumptions and ambiguity;
+      choose the simplest non-speculative implementation; make surgical changes only; and drive execution
+      from concrete success criteria with verification before claiming completion.
+
   - id: agent_harness_runtime_design
     name: Agent Harness Runtime Design
     enforcement: mandatory_consideration

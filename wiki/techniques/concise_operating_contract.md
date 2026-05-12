@@ -23,11 +23,12 @@ The agent will be used repeatedly by a team or across projects.
 
 ## Next / Enables
 
-- [[wiki/techniques/default_response_brevity|Default Response Brevity]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 
 ## Similar / Compare With
 
 - [[wiki/techniques/default_response_brevity|Default Response Brevity]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/prompt_versioning|Prompt and Policy Versioning]]
 - [[wiki/techniques/scope_control_and_minimal_diff|Scope Control and Minimal Diff Discipline]]
 
@@ -41,6 +42,7 @@ The agent will be used repeatedly by a team or across projects.
 - [[wiki/techniques/genai_telemetry_standardization|GenAI Telemetry Standardization]]
 - [[wiki/techniques/guardrails_tripwires|Guardrails and Tripwires]]
 - [[wiki/techniques/harness_engineering|Harness Engineering]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/model_routing_fallback_policy|Model Routing and Fallback Policy]]
 - [[wiki/techniques/observability_tracing|Observability and Trace Logging]]
 - [[wiki/techniques/permissioned_tool_execution|Permissioned Tool Execution]]

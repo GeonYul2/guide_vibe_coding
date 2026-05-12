@@ -23,12 +23,13 @@ Prompts, system policies, rubrics, or examples influence behavior.
 
 ## Next / Enables
 
-- [[wiki/techniques/scope_control_and_minimal_diff|Scope Control and Minimal Diff Discipline]]
+- None recorded.
 
 ## Similar / Compare With
 
 - [[wiki/techniques/concise_operating_contract|Concise Agent Operating Contract]]
 - [[wiki/techniques/default_response_brevity|Default Response Brevity]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/scope_control_and_minimal_diff|Scope Control and Minimal Diff Discipline]]
 
 ## Commonly Used With

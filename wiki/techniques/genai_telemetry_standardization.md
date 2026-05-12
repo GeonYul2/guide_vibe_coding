@@ -44,6 +44,7 @@ The agent needs production observability, cross-agent dashboards, cost/latency/q
 - [[wiki/techniques/failed_case_memory|Failed-Case Memory]]
 - [[wiki/techniques/guardrails_tripwires|Guardrails and Tripwires]]
 - [[wiki/techniques/harness_engineering|Harness Engineering]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/llm_wiki_context_compilation|LLM Wiki Context Compilation]]
 - [[wiki/techniques/model_routing_fallback_policy|Model Routing and Fallback Policy]]
 - [[wiki/techniques/observability_tracing|Observability and Trace Logging]]

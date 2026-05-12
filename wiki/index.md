@@ -49,6 +49,7 @@ This wiki is an Obsidian-compatible navigation and context-compilation layer. It
 - [[wiki/techniques/deployment_rollout_canary|Deployment, Rollout, and Canary Strategy]]
 - [[wiki/techniques/concise_operating_contract|Concise Agent Operating Contract]]
 - [[wiki/techniques/scope_control_and_minimal_diff|Scope Control and Minimal Diff Discipline]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/agent_harness_runtime_design|Agent Harness Runtime Design]]
 - [[wiki/techniques/permissioned_tool_execution|Permissioned Tool Execution]]
 - [[wiki/techniques/source_backed_technique_ingestion|Source-Backed Technique Ingestion]]

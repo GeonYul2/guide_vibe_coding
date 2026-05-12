@@ -42,6 +42,7 @@ Use this page when choosing techniques for a task. It groups similar techniques 
 
 - [[wiki/techniques/agent_readiness_scoring|Agent Readiness Scoring / Gap Map]]
 - [[wiki/techniques/deep_interview|Deep Interview / Requirement Crystallization]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/scope_control_and_minimal_diff|Scope Control and Minimal Diff Discipline]]
 - [[wiki/techniques/standardized_intake_gate|Standardized Intake Quality Gate]]
 
@@ -64,6 +65,7 @@ Use this page when choosing techniques for a task. It groups similar techniques 
 
 - [[wiki/techniques/concise_operating_contract|Concise Agent Operating Contract]]
 - [[wiki/techniques/default_response_brevity|Default Response Brevity]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/prompt_versioning|Prompt and Policy Versioning]]
 - [[wiki/techniques/scope_control_and_minimal_diff|Scope Control and Minimal Diff Discipline]]
 
@@ -102,6 +104,7 @@ Use this page when choosing techniques for a task. It groups similar techniques 
 - [[wiki/techniques/failed_case_memory|Failed-Case Memory]]
 - [[wiki/techniques/guardrails_tripwires|Guardrails and Tripwires]]
 - [[wiki/techniques/harness_engineering|Harness Engineering]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/permissioned_tool_execution|Permissioned Tool Execution]]
 - [[wiki/techniques/scope_control_and_minimal_diff|Scope Control and Minimal Diff Discipline]]
 - [[wiki/techniques/standardized_intake_gate|Standardized Intake Quality Gate]]

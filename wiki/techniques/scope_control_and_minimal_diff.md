@@ -19,11 +19,11 @@ The agent edits code, docs, configs, prompts, or workflows.
 
 ## Prerequisites / Before This
 
-- [[wiki/techniques/prompt_versioning|Prompt and Policy Versioning]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 
 ## Next / Enables
 
-- None recorded.
+- [[wiki/techniques/default_response_brevity|Default Response Brevity]]
 
 ## Similar / Compare With
 
@@ -31,6 +31,7 @@ The agent edits code, docs, configs, prompts, or workflows.
 - [[wiki/techniques/concise_operating_contract|Concise Agent Operating Contract]]
 - [[wiki/techniques/deep_interview|Deep Interview / Requirement Crystallization]]
 - [[wiki/techniques/default_response_brevity|Default Response Brevity]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/prompt_versioning|Prompt and Policy Versioning]]
 - [[wiki/techniques/standardized_intake_gate|Standardized Intake Quality Gate]]
 
@@ -45,6 +46,7 @@ The agent edits code, docs, configs, prompts, or workflows.
 - [[wiki/techniques/genai_telemetry_standardization|GenAI Telemetry Standardization]]
 - [[wiki/techniques/guardrails_tripwires|Guardrails and Tripwires]]
 - [[wiki/techniques/harness_engineering|Harness Engineering]]
+- [[wiki/techniques/karpathy_claude_md_discipline|Karpathy CLAUDE.md Coding Discipline]]
 - [[wiki/techniques/model_routing_fallback_policy|Model Routing and Fallback Policy]]
 - [[wiki/techniques/observability_tracing|Observability and Trace Logging]]
 - [[wiki/techniques/permissioned_tool_execution|Permissioned Tool Execution]]
